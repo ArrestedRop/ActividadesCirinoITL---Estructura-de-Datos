@@ -29,10 +29,13 @@ public class RegistroManual {
         return this.cuenta;
     }
     private Persona crearPersona(String nom) {
-        String num_con = Misc.entryString("De # de control: ");
-        String fecha_nac = Misc.entryString("De Fecha de Nacimiento:");
-        double peso = Misc.entryDouble("Peso de la persona:");
-        double talla = Misc.entryDouble("Estatura de la persona:");
-        return new Persona(nom, fecha_nac, talla, peso, num_con);
+        Persona p = new Persona();
+
+
+        Misc.numChecker("De # de control: ",p);
+        Misc.dateChecker("De Fecha de Nacimiento:",p);
+        Misc.weigthChecker("Peso de la persona:",p);
+        Misc.heightChecker("Estatura de la persona:",p);
+        return p;
     }
 }

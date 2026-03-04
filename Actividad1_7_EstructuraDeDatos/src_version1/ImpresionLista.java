@@ -1,7 +1,7 @@
 public class ImpresionLista {
 
     public void list(Persona[] grupo ) {
-
+        Terminal terminal = new Terminal("Terminal de impresion");
         for(int i = 0; i < grupo.length; i++){
             String nom = grupo[i].getNombre();
             String fecha_nac = grupo[i].getFecha_nac();
@@ -9,11 +9,12 @@ public class ImpresionLista {
             double peso = grupo[i].getPeso();
             double talla = grupo[i].getTalla();
 
-            System.out.println((i+1) + ".- | " + nom +
+            String Impresion = (i+1) + ".- | " + nom +
                                          " | " + fecha_nac +
                                          " | " + num_con +
                                          " | " + peso +
-                                         " | " + talla);
+                                         " | " + talla;
+            terminal.imprimir(Impresion);
         }
     }
 }
