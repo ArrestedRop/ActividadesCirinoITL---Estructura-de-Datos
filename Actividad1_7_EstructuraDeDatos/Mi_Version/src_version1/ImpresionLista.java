@@ -1,7 +1,6 @@
 public class ImpresionLista {
 
-    public void list(Persona[] grupo ) {
-        Terminal terminal = new Terminal("Terminal de impresion");
+    public void list(Persona[] grupo, Terminal terminal) {
         for(int i = 0; i < grupo.length; i++){
             String nom = grupo[i].getNombre();
             String fecha_nac = grupo[i].getFecha_nac();

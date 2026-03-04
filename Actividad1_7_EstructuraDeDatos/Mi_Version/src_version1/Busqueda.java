@@ -6,21 +6,16 @@ public class Busqueda {
 
     public int search(String nombre, Persona[] grupo, int cuenta) {
         this.compara = 0;
-        boolean encontrado = false;
-        while (!encontrado) {
             for (int i = 0; i < cuenta; i++) {
                 if (nombre.equalsIgnoreCase(grupo[i].getNombre())) {
                     JOptionPane.showMessageDialog(null,
                             "Persona encontrada con exito");
-                    encontrado = true;
                     this.compara++;
                     return i;
                 }
-                else {
-                    JOptionPane.showMessageDialog(null,"Dato no encontrado, intentar de nuevo");
-                }
-        }
-        }
+                JOptionPane.showMessageDialog(null,
+                        "Dato no encontrado, intentar de nuevo");
+            }
         return -1;
     }
 

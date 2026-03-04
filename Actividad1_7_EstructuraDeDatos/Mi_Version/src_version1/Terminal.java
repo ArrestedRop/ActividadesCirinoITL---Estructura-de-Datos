@@ -13,10 +13,10 @@ public class Terminal {
         area.setBackground(Color.BLACK);
         area.setForeground(Color.GREEN);
         area.setEditable(false);
-        area.setFont(new Font("Consolas", Font.PLAIN, 14));
+        area.setFont(new Font("Consolas", Font.PLAIN, 22));
 
         frame.add(new JScrollPane(area));
-        frame.setSize(500, 400);
+        frame.setSize(800, 600);
         frame.setVisible(true);
     }
 
