@@ -3,10 +3,10 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/Actividad1_7_EstructuraDeDatos/src_Entregable" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Actividad3_BusquedaSecuencial/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Actividades8_9/src_entregable" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Actividad1_7_EstructuraDeDatos/Mi_Version/src_version1" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ActividadesJAVA/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ActividadesJAVA/src_Entregable" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Actividad3_BusquedaSecuencial/out" />
     </content>
     <orderEntry type="inheritedJdk" />
