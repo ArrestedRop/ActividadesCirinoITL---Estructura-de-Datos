@@ -8,7 +8,11 @@ public class Terminal {
     private JTextArea area;
     private JFrame frame;
 
-    // Constructor: Aquí "nace" tu terminal visual
+    // Constructor: Aquí "nace" la terminal visual,
+    // la vdd me da hueva explicar paso por paso
+    // dejo link directo a la documentacion:
+
+
     public Terminal(String title) {
         frame = new JFrame(title);
         area = new JTextArea();

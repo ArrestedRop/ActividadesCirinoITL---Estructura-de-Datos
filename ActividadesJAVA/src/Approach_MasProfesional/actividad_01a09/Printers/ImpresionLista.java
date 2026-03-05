@@ -5,6 +5,8 @@ import Entregables.actividad_01a09.Persona;
 
 public class ImpresionLista {
 
+    //Clase enfocada en solo imprimir individual,
+    //intentando imitar los principios SOLID
     public void list(Persona[] grupo, Terminal terminal) {
         for(int i = 0; i < grupo.length; i++){
             String nom = grupo[i].getNombre();
@@ -18,6 +20,9 @@ public class ImpresionLista {
                                          " | " + num_con +
                                          " | " + peso +
                                          " | " + talla;
+
+            //Metodo del objeto terminal creado para a;adir strings,
+            // Revisar clase Terminal dentro del paquete Extras para mas info
             terminal.imprimir(Impresion);
         }
     }

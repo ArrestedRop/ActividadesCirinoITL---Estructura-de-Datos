@@ -12,6 +12,9 @@ public class RegistroArchivo {
     public Persona[] data(String archiv) {
         int totalLines = 0;
 
+        //Ya que no se puede usar de momento un ArrayList<>
+        // intento crear el arreglo con la cantidad de lineas del archivo de texto
+        //AVISO, CAMBIAR EL FORMATO DE TXT A CSV
         try {
             Scanner contador = new Scanner(new File(archiv));
             while (contador.hasNextLine()) {
@@ -32,7 +35,7 @@ public class RegistroArchivo {
                 boolean d3 = nPersona.setfecha_nac(info[2]);
                 boolean d4 = nPersona.setPeso(Double.parseDouble(info[3]));
                 boolean d5 = nPersona.setEstatura(Double.parseDouble(info[4]));
-
+            //Si un solo dato es invalido, se toma como basura
                if (d1 && d2&& d3&& d4&& d5) {
                    grupo[this.cuenta] = nPersona;
                    this.cuenta++;

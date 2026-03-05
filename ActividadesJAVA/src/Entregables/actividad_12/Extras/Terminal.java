@@ -15,7 +15,7 @@ public class Terminal {
         area.setBackground(Color.WHITE);
         area.setForeground(Color.BLACK);
         area.setEditable(false);
-        area.setFont(new Font("MS Gothic", Font.PLAIN, 22));
+        area.setFont(new Font("Terminal", Font.PLAIN, 22));
 
         frame.setLocationRelativeTo(null);
         frame.add(new JScrollPane(area));

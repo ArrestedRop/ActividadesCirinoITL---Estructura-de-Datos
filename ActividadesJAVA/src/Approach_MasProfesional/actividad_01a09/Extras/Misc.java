@@ -5,12 +5,12 @@ import Entregables.actividad_01a09.Persona;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
-
+//Clase exclusiva para extras
 public class Misc {
-
+    //Creador del filesearcher, usa el JFileCHooser directmente de javax.swing
     public static String fileSearcher() {
         JFileChooser searcher = new JFileChooser();
-
+        //Filtro para solo mostrar archivos csv y txt
         FileNameExtensionFilter filter = new FileNameExtensionFilter
                 ("Archivos de datos (.txt, .csv)", "txt", "csv");
         searcher.setFileFilter(filter);
@@ -23,7 +23,7 @@ public class Misc {
         else
             return "";
     }
-
+    //Clase estatica que permite el llamado de un panel de recepcion - String
     public static String entryString(String prompt) {
         String dato = JOptionPane.showInputDialog(null, prompt,
                 "Entrada de datos", JOptionPane.QUESTION_MESSAGE);
@@ -33,7 +33,7 @@ public class Misc {
         }
         return dato;
     }
-
+    //Clase estatica que permite el llamado de un panel de recepcion - double
     public static double entryDouble(String prompt) {
         while (true) {
             try {
@@ -46,7 +46,7 @@ public class Misc {
             }
         }
     }
-
+    //Clases requeridas por el profe para revisar los datos con los setters
     public static void dateChecker(String prompt, Persona p ) {
         String input = entryString(prompt);
         boolean isValid = p.setfecha_nac(input);

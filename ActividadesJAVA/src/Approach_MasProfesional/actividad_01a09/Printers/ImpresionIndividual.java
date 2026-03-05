@@ -6,6 +6,9 @@ import javax.swing.*;
 
 public class ImpresionIndividual {
 
+    //Clase enfocada en solo imprimir individual,
+    //intentando imitar los principios SOLID
+
     public void outs(int pos, int compara, Persona[] grupo, String nombre) {
         String num_con = grupo[pos].getNum_con();
         String fecha_nac = grupo[pos].getFecha_nac();
