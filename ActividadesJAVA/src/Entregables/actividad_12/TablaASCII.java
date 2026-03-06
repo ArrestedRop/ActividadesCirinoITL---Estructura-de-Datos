@@ -1,5 +1,18 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 12
+Fecha: 4/3/2026
+*/
+
 package Entregables.actividad_12;
 import Entregables.actividad_12.Extras.Terminal;
+
 
 public class TablaASCII {
     public static void main(String[] args) {
@@ -7,16 +20,13 @@ public class TablaASCII {
                 "Impresion de la tabla ASCII - IBM PC 1981");
 
         TablaASCII prueba = new TablaASCII();
-        terminal.imprimir(prueba.goal());
         prueba.outs(terminal);
-
-
         }
 
-    public String goal() {
+    public void goal(Terminal terminal) {
         String meta = "Programa que imprime en una terminal" +
                 " la tabla de caracteres ASCII de la IBM PC 1981";
-        return meta;
+        terminal.imprimir(meta);
     }
 
     public void outs(Terminal terminal) {
@@ -24,13 +34,14 @@ public class TablaASCII {
             char character;
             StringBuilder linea = new StringBuilder();
 
-            //Creamos una terminal ( no es necesaria, solo es pa que se vea mas lampara)
-
+            //Creamos una terminal (no es necesaria,
+            // solo es pa que se vea mas lampara)
             String titulo = "\n\n  Lista de caracteres ASCII - IBM PC 1981" +
                     "\n  ________________________________\n";
             terminal.imprimir(titulo);
 
-            //Ciclo que nos ayuda a imprimir el StringBuilder con la info de los characters
+            //Ciclo que nos ayuda a imprimir
+            // el StringBuilder con la info de los characters
             for(int i = 0;i <=256; i++) {
                 character = (char) i;
                 //Formato que permite la existencia de "Columnas"

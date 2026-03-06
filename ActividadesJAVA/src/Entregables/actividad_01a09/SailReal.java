@@ -3,9 +3,9 @@ package Entregables.actividad_01a09;
 import Entregables.actividad_01a09.Extras.Misc;
 import Entregables.actividad_01a09.Regis.RegistroArchivo;
 import Entregables.actividad_01a09.Regis.RegistroManual;
+import Entregables.actividad_01a09.Extras.Terminal;
 
 import javax.swing.*;
-import java.util.Scanner;
 /*
 Tecnológico Nacional de México
 Instituto Tecnológico de León
@@ -19,16 +19,14 @@ Fecha: 4/3/2026
 */
 
 public class SailReal {
-    public String goal() {
-        String meta = "Programa para capturar y buscar datos de personas almacenadas en una colección,\n" +
-                " usaremos captura de datos por centinela ademas de busqueda secuencial y binaria\n" +
-                " en un arreglo de apuntadores a objetos\n";
-        return meta;
-    }
+
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
+       Terminal terminal = new Terminal("Terminal de impresion");
         RegistroManual regisMan = new RegistroManual();
         RegistroArchivo regisArc = new RegistroArchivo();
+        SailReal prueba = new SailReal();
+
+        terminal.imprimir(prueba.goal());
 
         int opt;
         int cuenta = 0;
@@ -59,28 +57,35 @@ public class SailReal {
                     if (!path.isEmpty()) {
                         grupo = regisArc.data(path);
                         cuenta = regisArc.getCuenta();
+                        JOptionPane.showMessageDialog
+                                (null, "Cantidad de datos cargados: " + cuenta,
+                                        "Carga exitosa", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
                 case 3 -> {
                     String target = JOptionPane.showInputDialog("Nombre a buscar (Secuencial):");
-                    int pos = searchSecuencial(target, grupo, cuenta);
-                    imprimirIndividual(pos, target, grupo);
+                    int pos = prueba.searchSecuencial(target, grupo, cuenta);
+                    prueba.imprimirIndividual(pos, target, grupo);
                 }
                 case 4 -> {
-                    // Nota: Aquí deberías ordenar antes de llamar a la binaria paps
                     String target = JOptionPane.showInputDialog("Nombre a buscar (Binaria):");
-                    int pos = searchBinaria(target, grupo, cuenta);
-                    imprimirIndividual(pos, target, grupo);
+                    int pos = prueba.searchBinaria(target, grupo, cuenta);
+                    prueba.imprimirIndividual(pos, target, grupo);
                 }
-                case 5 -> imprimirLista(grupo, cuenta);
+                case 5 -> prueba.imprimirLista(grupo, cuenta, terminal);
                 case 6 -> System.out.println("Saliendo...");
             }
         } while (opt != 6);
     }
 
-    // --- MÓDULOS FUSIONADOS (ESTILO SAIL) ---
+    public String goal() {
+        String meta = "Programa para capturar y buscar datos de personas almacenadas en una colección,\n" +
+                " usaremos captura de datos por centinela ademas de busqueda secuencial y binaria\n" +
+                " en un arreglo de apuntadores a objetos\n";
+        return meta;
+    }
 
-    public static int searchSecuencial(String nombre, Persona[] grupo, int cuenta) {
+    public int searchSecuencial(String nombre, Persona[] grupo, int cuenta) {
         if (grupo == null) return -1;
         for (int i = 0; i < cuenta; i++) {
             if (nombre.equalsIgnoreCase(grupo[i].getNombre())) return i;
@@ -88,7 +93,7 @@ public class SailReal {
         return -1;
     }
 
-    public static int searchBinaria(String objetivo, Persona[] grupo, int cuenta) {
+    public int searchBinaria(String objetivo, Persona[] grupo, int cuenta) {
         if (grupo == null) return -1;
         int inicio = 0, fin = cuenta - 1;
         while (inicio <= fin) {
@@ -101,7 +106,7 @@ public class SailReal {
         return -1;
     }
 
-    public static void imprimirIndividual(int pos, String nombre, Persona[] grupo) {
+    public void imprimirIndividual(int pos, String nombre, Persona[] grupo) {
         if (pos != -1) {
             Persona p = grupo[pos];
             String info = "Nombre: " + p.getNombre() + "\nNC: " + p.getNum_con() +
@@ -114,16 +119,25 @@ public class SailReal {
         }
     }
 
-    public static void imprimirLista(Persona[] grupo, int cuenta) {
+    public void imprimirLista(Persona[] grupo, int cuenta,Terminal terminal) {
         if (grupo == null || cuenta == 0) {
             JOptionPane.showMessageDialog(null, "Lista vacía");
             return;
         }
-        StringBuilder sb = new StringBuilder("--- LISTA DE PERSONAS ---\n");
-        for (int i = 0; i < cuenta; i++) {
-            sb.append(i + 1).append(". ").append(grupo[i].getNombre()).append("\n");
-        }
-        JOptionPane.showMessageDialog(null, sb.toString());
-    }
+            for(int i = 0; i < cuenta; i++){
+                String nom = grupo[i].getNombre();
+                String fecha_nac = grupo[i].getFecha_nac();
+                String num_con = grupo[i].getNum_con();
+                double peso = grupo[i].getPeso();
+                double talla = grupo[i].getTalla();
+                String Impresion = (i+1) + ".- | " + nom +
+                        " | " + fecha_nac +
+                        " | " + num_con +
+                        " | " + peso +
+                        " | " + talla;
 
-}
+                terminal.imprimir(Impresion);
+            }
+        }
+
+    }

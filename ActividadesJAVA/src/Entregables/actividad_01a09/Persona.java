@@ -56,7 +56,7 @@ public class Persona {
 
     public boolean setNum_con(String num_con) {
 
-        if(num_con == null||num_con.isEmpty()||num_con.length() != 5) {
+        if(num_con == null||num_con.isEmpty()||num_con.length() != 8) {
             return false;
         }
         else {

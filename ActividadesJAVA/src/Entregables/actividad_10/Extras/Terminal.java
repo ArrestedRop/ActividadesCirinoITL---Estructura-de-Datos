@@ -1,4 +1,4 @@
-package Entregables.actividad_01a09.Extras;
+package Entregables.actividad_10.Extras;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class Terminal {
         frame = new JFrame(title);
         area = new JTextArea();
         area.setBackground(Color.WHITE);
-        area.setForeground(Color.BLUE);
+        area.setForeground(Color.BLACK);
         area.setEditable(false);
         area.setFont(new Font("Terminal", Font.PLAIN, 22));
 
@@ -24,8 +24,14 @@ public class Terminal {
     }
 
     public void imprimir(String content) {
-        area.append(content + "\n");
+        area.append(content);
+    }
+    public void multiPrint(String content,String content1,
+                           String content2,String content3) {
+        area.append(content + "\n" +
+                    content1 + "\n" +
+                    content2 + "\n" +
+                    content3 + "\n" );
     }
 
 }
-
