@@ -24,7 +24,7 @@ public class Terminal {
     }
 
     public void imprimir(String content) {
-        area.append(content);
+        area.append(content + "\n");
     }
     public void multiPrint(String content,String content1,
                            String content2,String content3) {

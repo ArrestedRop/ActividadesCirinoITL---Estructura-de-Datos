@@ -27,23 +27,36 @@ public class Primitivos {
     }
 
     public void results(Terminal terminal) {
-    String bars = "____________________________________________________________\n";
-    String header = String.format("%-10s | %-10s | %-5s\n", "Tipo", "Mínimo", "Máximo");
-    String format = "%-12s | %-10s | %-30s";
 
-    String sByte = String.format(format, "byte", Byte.MIN_VALUE, Byte.MAX_VALUE);
-    String sShort = String.format(format, "short", Short.MIN_VALUE, Short.MAX_VALUE);
-    String sInt = String.format(format, "int", Integer.MIN_VALUE, Integer.MAX_VALUE);
-    String sLong = String.format(format, "long", Long.MIN_VALUE, Long.MAX_VALUE);
-    String sFloat = String.format("%-12s | %-30e | %-30e", "float", Float.MIN_VALUE, Float.MAX_VALUE);
-    String sDouble = String.format("%-12s | %-30e | %-30e", "double", Double.MIN_VALUE, Double.MAX_VALUE);
-    String sChar = String.format(format, "char", (int)Character.MIN_VALUE, (int)Character.MAX_VALUE);
-    String sBool = String.format(format, "boolean", "false", "true");
+        String bars = "____________________________________________________________\n";
 
-    terminal.imprimir(bars);
-    terminal.imprimir(header);
-    terminal.imprimir(bars);
-    terminal.multiPrint(sByte,sShort,sInt,sLong);
-    terminal.multiPrint(sFloat,sDouble,sChar,sBool);
+
+        String sByte = "byte: " + Byte.MIN_VALUE;
+        String sShort ="short: " + Short.MIN_VALUE;
+        String sInt = "int: " + Integer.MIN_VALUE;
+        String sLong = "long: " + Long.MIN_VALUE;
+        String sFloat = "float: "+ Float.MIN_VALUE;
+        String sDouble ="double: " + Double.MIN_VALUE;
+        String sChar = "char: " + (int)Character.MIN_VALUE;
+        String sBool =  "false";
+        terminal.imprimir("Minimo");
+        terminal.imprimir(bars);
+        terminal.multiPrint(sByte,sShort,sInt,sLong);
+        terminal.multiPrint(sFloat,sDouble,sChar,sBool);
+        terminal.imprimir(bars);
+        sByte = "byte: " + Byte.MAX_VALUE;
+        sShort ="short: " + Short.MAX_VALUE;
+        sInt = "int: " + Integer.MAX_VALUE;
+        sLong = "long: " + Long.MAX_VALUE;
+        sFloat = "float: "+ Float.MAX_VALUE;
+        sDouble ="double: " + Double.MAX_VALUE;
+        sChar = "char: " + (int)Character.MAX_VALUE;
+        sBool =  "True";
+        terminal.imprimir("Maximo");
+        terminal.imprimir(bars);
+        terminal.multiPrint(sByte,sShort,sInt,sLong);
+        terminal.multiPrint(sFloat,sDouble,sChar,sBool);
+        terminal.imprimir(bars);
+
     }
 }
