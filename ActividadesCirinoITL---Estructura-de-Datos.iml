@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Actividades8_9/src_entregable" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ActividadesJAVA/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ActividadesJAVA/src_Entregable" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TareasJAVA/src_tareas" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Actividad3_BusquedaSecuencial/out" />
     </content>
     <orderEntry type="inheritedJdk" />
