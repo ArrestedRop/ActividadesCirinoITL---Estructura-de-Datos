@@ -1,0 +1,96 @@
+
+1. METODO goal():
+   REGRESA "Programa para gestionar una colección de 25 personas mediante
+            encapsulamiento, captura por centinela y algoritmos de búsqueda."
+
+2. GESTIÓN DE DATOS:
+
+   2.1 METODO data(): // Captura Manual por Teclado
+       cuenta = 0
+       Escribe("Deme el nombre (o 'fin' para terminar): ")
+       nombre = leer()
+       MIENTRAS (nombre != "fin" Y cuenta < 25) EMPEZAR
+           control = pide("Número de Control: ")
+           fNac    = pide("Fecha de Nacimiento: ")
+           peso    = pide("Peso (kg): ")
+           talla   = pide("Estatura (m): ")
+
+           // Instanciación del objeto en el arreglo de apuntadores
+           grupo[cuenta] = NUEVA Persona(nombre, control, fNac, peso, talla)
+           cuenta = cuenta + 1
+
+           SI (cuenta < 25) EMPEZAR
+               Escribe("Siguiente nombre (o 'fin'): ")
+               nombre = leer()
+           TERMINAR
+       TERMINAR
+
+   2.2 METODO read(archi): // Carga desde Archivo CSV
+       cuenta = 0
+       in = ABRIR(archi)
+       MIENTRAS (NO EOF(in) Y cuenta < 25) EMPEZAR
+           reg = leerRegistro(in) // Obtiene los campos del archivo
+           grupo[cuenta] = NUEVA Persona()
+           grupo[cuenta].setNombre(reg.nombre)
+           grupo[cuenta].setControl(reg.control)
+           grupo[cuenta].setFNac(reg.fNac)
+           grupo[cuenta].setPeso(reg.peso)
+           grupo[cuenta].setTalla(reg.talla)
+           cuenta = cuenta + 1
+       TERMINAR
+       CERRAR(in)
+
+3. ALGORITMOS DE BÚSQUEDA:
+
+   3.1 METODO searchSecuencial(target): // O(n)
+       DESDE i = 0 HASTA (cuenta - 1) EMPEZAR
+           SI (target == grupo[i].getNombre()) RETORNAR i
+       TERMINAR
+       RETORNAR -1
+
+   3.2 METODO searchBinaria(target): // O(log n) - Requiere orden alfabético
+       inicio = 0
+       fin = cuenta - 1
+       MIENTRAS (inicio <= fin) EMPEZAR
+           mitad = (inicio + fin) / 2
+           resultado = comparar(target, grupo[mitad].getNombre())
+           SI (resultado == 0) RETORNAR mitad
+           SI (resultado > 0)  inicio = mitad + 1
+           DE OTRO MODO       fin = mitad - 1
+       TERMINAR
+       RETORNAR -1
+
+4. INTERFAZ Y SALIDA:
+
+   4.1 METODO listar():
+       ESCRIBE("--- LISTADO DE PERSONAS ---")
+       ESCRIBE("ID | CONTROL | NOMBRE | FECHA NAC | PESO | TALLA")
+       DESDE i = 0 HASTA (cuenta - 1) EMPEZAR
+           P = grupo[i]
+           ESCRIBE(i + " | " + P.getControl() + " | " + P.getNombre() + " | "
+                   + P.getFNac() + " | " + P.getPeso() + " | " + P.getTalla())
+       TERMINAR
+
+   4.2 METODO outs(pos, target):
+       SI (pos != -1) EMPEZAR
+           P = grupo[pos]
+           ESCRIBE("Encontrado en posición: " + pos)
+           ESCRIBE("Datos: " + P.getNombre() + ", " + P.getControl())
+       TERMINAR
+       DE OTRO MODO EMPEZAR
+           ESCRIBE("La persona '" + target + "' no está en el registro.")
+       TERMINAR
+
+5. METODO sail(): // Menú de Control Principal
+   REPETIR EMPEZAR
+       ESCRIBE("1. Captura Manual | 2. Cargar Archivo | 3. Listar")
+       ESCRIBE("4. Busq. Secuencial | 5. Busq. Binaria | 6. Salir")
+       op = leer()
+       SEGUN (op) EMPEZAR
+           CASO 1: data()
+           CASO 2: archi = pide("Ruta:"); read(archi)
+           CASO 3: listar()
+           CASO 4: nom = pide("Nombre:"); pos = searchSecuencial(nom); outs(pos, nom)
+           CASO 5: nom = pide("Nombre:"); pos = searchBinaria(nom); outs(pos, nom)
+       TERMINAR
+   MIENTRAS (op != 6)

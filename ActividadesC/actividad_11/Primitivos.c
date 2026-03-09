@@ -15,6 +15,10 @@ Fecha: 6/3/2026
 #include <float.h>
 void goal();
 void results();
+void int_limits();
+void char_limits();
+void float_limits();
+void long_limits();
 
 int main() {
     goal();
@@ -30,14 +34,29 @@ void goal() {
 }
 void results() {
     printf("%-12s | %-20s | %-21s\n" , "Tipo", "Mínimo", "Máximo");  
-    
-    printf("%-12s | %-20d | %-20d\n",
+    char_limits();
+    int_limits();
+    float_limits();
+    long_limits();
+}
+
+void char_limits() {
+     printf("%-12s | %-20d | %-20d\n",
          "char:", SCHAR_MIN, SCHAR_MAX);
-    printf("%-12s | %-20d | %-20d\n",
+}
+
+void int_limits() {
+     printf("%-12s | %-20d | %-20d\n",
          "int:", INT_MIN, INT_MAX);
-    printf("%-12s | %-20e | %-20e\n",
+}
+
+void float_limits() {
+     printf("%-12s | %-20e | %-20e\n",
          "float:", FLT_MIN, FLT_MAX);
-    printf("%-12s | %-20ld | %-20ld\n",
+}
+
+void long_limits() {
+     printf("%-12s | %-20ld | %-20ld\n",
          "long:", LONG_MIN, LONG_MAX);
 }
 
