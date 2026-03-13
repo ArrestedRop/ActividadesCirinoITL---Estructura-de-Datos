@@ -4,12 +4,10 @@ public class Rational implements Rationalizable {
     private int numerator;
     private int denominator;
 
-    // Constructores
     public Rational() {
         this.numerator = 0;
         this.denominator = 1;
     }
-
     public Rational(Rational r2) {
         this.numerator = r2.getNumerator();
         this.denominator = r2.getDenominator();
@@ -26,7 +24,7 @@ public class Rational implements Rationalizable {
     public void setNumerator(int numerator) { this.numerator = numerator; }
     public void setDenominator(int denominator) {
         this.denominator = (denominator == 0) ? 1 : denominator; }
-    
+
     @Override
     public Rational addition(Rational r1, Rational r2) {
         int newNUM = (r1.numerator * r2.denominator) + (r2.numerator * r1.denominator);
@@ -71,8 +69,6 @@ public class Rational implements Rationalizable {
         return this;
     }
 
-    // --- MÉTODOS DE COMPARACIÓN (BOOLEANOS) ---
-
     @Override
     public boolean equalsOperator(Rational r1, Rational r2) {
         return (r1.numerator * r2.denominator) == (r2.numerator * r1.denominator);
@@ -103,9 +99,4 @@ public class Rational implements Rationalizable {
         return !equalsOperator(r1, r2);
     }
 
-    // Extra: Útil para mostrar resultados
-    @Override
-    public String toString() {
-        return numerator + "/" + denominator;
-    }
 }
