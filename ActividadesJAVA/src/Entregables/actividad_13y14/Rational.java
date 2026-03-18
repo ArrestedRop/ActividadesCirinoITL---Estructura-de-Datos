@@ -4,57 +4,90 @@ public class Rational implements Rationalizable {
     private int numerator;
     private int denominator;
 
-    public Rational() {
-        this.numerator = 0;
-        this.denominator = 1;
-    }
-    public Rational(Rational r2) {
-        this.numerator = r2.getNumerator();
-        this.denominator = r2.getDenominator();
-    }
-
+    // Constructores (Default, Copy, Normal)
+    public Rational() { this.numerator = 0; this.denominator = 1; }
+    public Rational(Rational r2) { this.numerator = r2.numerator; this.denominator = r2.denominator; }
     public Rational(int numerator, int denominator) {
         this.numerator = numerator;
         this.denominator = (denominator == 0) ? 1 : denominator;
     }
 
-    // Getters y Setters
-    public int getNumerator() { return numerator; }
-    public int getDenominator() { return denominator; }
-    public void setNumerator(int numerator) { this.numerator = numerator; }
-    public void setDenominator(int denominator) {
-        this.denominator = (denominator == 0) ? 1 : denominator; }
-
+    public int getMCD(int num, int den){
+        return (den==0) ? num : getMCD(den, num %den);
+    }
+    public Rational simplify(int num, int den) {
+        int comun = getMCD(Math.abs(num),Math.abs(den));
+        return new Rational(num/comun,den/comun);
+    }
+    // Aritmetica rational|rational
     @Override
     public Rational addition(Rational r1, Rational r2) {
-        int newNUM = (r1.numerator * r2.denominator) + (r2.numerator * r1.denominator);
-        int newDEN = r1.denominator * r2.denominator;
-        return new Rational(newNUM, newDEN);
+        int a = r1.numerator, b = r1.denominator;
+        int c = r2.numerator, d = r2.denominator;
+        Rational r3 = simplify((a * d) + (b * c), b * d);
+        return r3;
     }
 
     @Override
     public Rational subtraction(Rational r1, Rational r2) {
-        int newNUM = (r1.numerator * r2.denominator) - (r2.numerator * r1.denominator);
-        int newDEN = r1.denominator * r2.denominator;
-        return new Rational(newNUM, newDEN);
+        int a = r1.numerator, b = r1.denominator;
+        int c = r2.numerator, d = r2.denominator;
+        Rational r3 = simplify((a * d) - (b * c), b * d);
+        return r3;
     }
 
     @Override
     public Rational multiplication(Rational r1, Rational r2) {
-        return new Rational(r1.numerator * r2.numerator, r1.denominator * r2.denominator);
+        int a = r1.numerator, b = r1.denominator;
+        int c = r2.numerator, d = r2.denominator;
+        Rational r3 = simplify((a*c),(b*d));
+        return r3;
     }
 
     @Override
     public Rational division(Rational r1, Rational r2) {
-        // División: (a/b) / (c/d) = (a*d) / (b*c)
-        return new Rational(r1.numerator * r2.denominator, r1.denominator * r2.numerator);
+        int a = r1.numerator, b = r1.denominator;
+        int c = r2.numerator, d = r2.denominator;
+        Rational r3 = simplify((a*d),(c*b));
+        return r3;
     }
 
+//    Sobrecargados rational|entero
+    public Rational addition(Rational r1, int num) {
+        int a = r1.numerator, b = r1.denominator;
+        int c = num, d = 1;
+        Rational r3 = simplify((a * d) + (b * c), b * d);
+        return r3;
+    }
+
+    public Rational subtraction(Rational r1, int num) {
+        int a = r1.numerator, b = r1.denominator;
+        int c = num, d = 1;
+        Rational r3 = simplify((a * d) - (b * c), b * d);
+        return r3;
+    }
+
+    public Rational multiplication(Rational r1, int num) {
+        int a = r1.numerator, b = r1.denominator;
+        int c = num, d = 1;
+        Rational r3 = simplify((a*c),(b*d));
+        return r3;
+    }
+
+    public Rational division(Rational r1, int num) {
+        int a = r1.numerator, b = r1.denominator;
+        int c = num, d = 1;
+        Rational r3 = simplify((a*d),(c*b));
+        return r3;
+    }
+
+//    Otros operadores
     @Override
     public Rational exponentiation(Rational r1, int exponent) {
         int newNUM = (int) Math.pow(r1.numerator, exponent);
         int newDEN = (int) Math.pow(r1.denominator, exponent);
-        return new Rational(newNUM, newDEN);
+        Rational r3 = simplify(newNUM,newDEN);
+        return r3;
     }
 
     @Override
@@ -63,12 +96,13 @@ public class Rational implements Rationalizable {
     }
 
     @Override
-    public Rational assignmentOperator(Rational r2) {
+    public Rational assignment(Rational r2) {
         this.numerator = r2.numerator;
         this.denominator = r2.denominator;
         return this;
     }
 
+    // --- COMPARISON (The logic you liked) ---
     @Override
     public boolean equalsOperator(Rational r1, Rational r2) {
         return (r1.numerator * r2.denominator) == (r2.numerator * r1.denominator);
@@ -96,7 +130,10 @@ public class Rational implements Rationalizable {
 
     @Override
     public boolean notEquals_Operator(Rational r1, Rational r2) {
+
         return !equalsOperator(r1, r2);
     }
 
+    @Override
+    public String toString() { return numerator + "/" + denominator; }
 }

@@ -1,0 +1,124 @@
+================================================================================
+ALGORITMO PARA PROBAR LAS PRESTACIONES DE ADT RATIONAL (ACTIVIDAD 13 Y 14)
+================================================================================
+
+1.- Meta: 
+    Codificar un programa que permita probar las prestaciones del ADT Rational 
+    usando variables tipo Rational y tipo entero, conforme a la especificación 
+    del documento Rational.pdf.
+
+2.- Datos: 
+    Usar tres variables Rational r1, r2, r3, variables enteras i, exp, opA, opC, 
+    seleccion y una bandera booleana operatorflag.
+
+    Ir al paso 5 (Navegabilidad) y regresar con la seleccion = ?
+    Segun (seleccion) empezar
+        Caso 1, 2, 3, 4: 
+            opA = menu("1.- Aritmetica quebrados, 2.- Mixta, 3.- Nada", 1, 3);
+            Llamar a capturar2(opA); romper;
+        Caso 5: 
+            r1 = captuRat();
+            exp = captuInt("exponente"); romper;
+        Caso 6, 7: 
+            r1 = captuRat(); romper;
+        Caso 8: 
+            opC = menu("1. Igual, 2. Mayor, 3. Menor, 4. M. Igual, 5. m. Igual, 6. No igual", 1, 6);
+            r1 = captuRat();
+            r2 = captuRat(); romper;
+    Terminar
+
+    2.1 captuRat(): Rational
+        Hacer empezar
+            Escribir("Proporcione el numerador:"); x = ?
+        Mientras (!isInt(x));
+        Hacer empezar
+            Escribir("Proporcione el denominador:"); y = ?
+        Mientras (!isInt(y));
+        Regresar nuevo Rational(x, y);
+
+    2.2 capturar2(op):
+        Si (op == 1) empezar
+            r1 = captuRat();
+            r2 = captuRat();
+        Terminar de otro modo empezar
+            r1 = captuRat();
+            i = captuInt("Numero Entero");
+        Terminar
+
+    2.3 captuInt(prompt): int
+        Hacer empezar
+            Escribir("Proporcione el " + prompt); ent = ?
+        Mientras (!isInt(ent));
+        Regresar convertirAEntero(ent);
+
+3.- Cálculos (Processes):
+    Si (seleccion < 8) empezar
+        Segun (seleccion) empezar
+            Caso 1, 2, 3, 4: 
+                Si (opA == 1) r3 = aritmethics(seleccion, r1, r2);
+                Sino r3 = mixture(seleccion, r1, i); romper;
+            Caso 5: r3 = r1.exponentiation(r1, exp); romper;
+            Caso 6: r3 = r1.negation(r1); romper;
+            Caso 7: r3 = r1.assignment(captuRat()); romper;
+        Terminar
+    Terminar de otro modo empezar
+        operatorflag = ratOperators(opC, r1, r2);
+    Terminar
+
+    3.1 aritmethics(op, r1, r2): Rational
+        Segun (op) empezar
+            Caso 1: res = r1.addition(r1, r2); romper;
+            Caso 2: res = r1.subtraction(r1, r2); romper;
+            Caso 3: res = r1.multiplication(r1, r2); romper;
+            Caso 4: res = r1.division(r1, r2); romper;
+        Terminar
+        Regresar res al llamador;
+
+    3.2 mixture(op, r1, i): Rational
+        Segun (op) empezar
+            Caso 1: res = r1.addition(r1, i); romper;
+            Caso 2: res = r1.subtraction(r1, i); romper;
+            Caso 3: res = r1.multiplication(r1, i); romper;
+            Caso 4: res = r1.division(r1, i); romper;
+        Terminar
+        Regresar res al llamador;
+
+    3.3 ratOperators(op, r1, r2): boolean
+        Segun (op) empezar
+            Caso 1: res = r1.equals(r1, r2); romper;
+            Caso 2: res = r1.greaterThan(r1, r2); romper;
+            Caso 3: res = r1.lessThan(r1, r2); romper;
+            Caso 4: res = r1.greaterEquals(r1, r2); romper;
+            Caso 5: res = r1.lessEquals(r1, r2); romper;
+            Caso 6: res = r1.notEquals(r1, r2); romper;
+        Terminar
+        Regresar res al llamador;
+
+4.- Resultados (Outs):
+    Segun (seleccion) empezar
+        Caso 1, 2, 3, 4, 5, 6, 7: 
+            Escribir("Resultado: " + r3); romper;
+        Caso 8: 
+            msg = operatorStr(opC, operatorflag);
+            Escribir(msg); romper;
+    Terminar
+
+5.- Navegabilidad:
+    Hacer empezar
+        Escribir("--- Menú de Opciones (ADT Rational) ---");
+        Escribir("1. Addition, 2. Subtraction, 3. Multiplication, 4. Division");
+        Escribir("5. Exponenciación, 6. Negación, 7. Asignación, 8. Comparación, 9. Salir");
+        Escribir("Su eleccion:");
+        resp = ?
+    Mientras (resp < 1 o resp > 9);
+    Regresar resp al llamador;
+
+    5.1 menu(prompt, min, max): int
+        Hacer empezar
+            Escribir(prompt);
+            Escribir("Su eleccion:");
+            op = ?
+        Mientras (op < min o op > max);
+        Regresar op al llamador;
+
+================================================================================
