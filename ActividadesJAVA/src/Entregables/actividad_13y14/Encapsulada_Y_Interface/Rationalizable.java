@@ -7,7 +7,7 @@ public interface Rationalizable {
     Rational division(Rational r1, Rational r2);
     Rational exponentiation(Rational r2, int exponent);
     Rational negation(Rational r2);
-    Rational assignmentOperator(Rational r2);
+    Rational assignment(Rational r2);
     boolean equalsOperator(Rational r1, Rational r2);
     boolean greater_thanOperator(Rational r1, Rational r2);
     boolean less_thanOperator(Rational r1, Rational r2);

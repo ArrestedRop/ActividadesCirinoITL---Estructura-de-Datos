@@ -1,0 +1,132 @@
+ejercicio 3 Algoritmo para probar las prestaciones de ADT Rational
+
+1.- Meta: Codificar un programa que permita probar las prestaciones del ADT
+          Rational usando un variables tipo Rational y tipo entero. Conforme a
+          la especificacion del documento Rational.pdf
+
+2.- Datos: Usar tres variables Rational q1, q2, q3 y una varible entera i.
+
+           ir al paso 5 de navegabilidad y regresar con la resp = ?
+           seleccionada por el usuario
+           segun (resp) empezar
+             caso 1:
+             caso 2:
+             caso 3:
+             caso 4:
+             caso 5: captura2(); romper;
+             caso 6: q1 = captuRat();
+                     exp = capturae(); romper;
+             caso 7:
+             caso 8: i = capturai();
+           terminar
+
+     2.1 captuRat(): Rational
+           hacer empezar
+              Escribir("deme el numerador:"); x = ?
+           mientras (!esInt(x));
+           hacer empezar
+              Escribir("deme el denominador:"); y = ?
+           mientras (!esInt(y) or y < 0);
+           return nuevo Rational(x,y)
+
+     2.2 captura2():
+            ir al 5.1 op = menuQI()
+            si (op == 1) empezar
+              q1 = captuRat();
+              q2 = captuRat();
+            terminar
+            de otro modo empezar
+              q1 = captuRat();
+              i = capturaI()
+            terminar
+
+     2.3 capturai(): int
+            hacer empezar
+              Escribir("deme el entero:"); i = ?
+            mientras (!esInt(i));
+            return i;
+
+     2.4 capturai(): int
+            hacer empezar
+              Escribir("deme el exponente:"); exp = ?
+            mientras (!esInt(exp));
+            return exp;
+
+
+
+3. Calculos:
+           segun (resp) empezar
+             caso 1: if (op == 1)
+                       q3 = aritmetica();
+                     else
+                       q3 = mixture();
+                     romper;
+             caso 5: q1.compare(q2); romper;
+             caso 6: q3 = power(q1, exp); romper;
+             caso 7: q3 = q1.minus(q1);
+             caso 8: q3 = q1.asign(q1);
+           terminar
+
+   3.1 aritmetica(): Rational
+           segun (resp) empezar
+             caso 1: resp = q2.sumar(q3); romper;
+             caso 2: resp = q2.restar(q3); romper;
+             caso 3: resp = q2.multiplcar(q3); romper;
+             caso 4: resp = q2.dividir(q3)
+           terminar
+           regresar resp al llamador
+
+   3.2 mixture() : Rational
+           segun (resp) empezar
+             caso 1: resp = q2.sumar(i); romper;
+             caso 2: resp = q2.restar(i); romper;
+             caso 3: resp = q2.multiplcar(i); romper;
+             caso 4: resp = q2.dividir(i)
+           terminar
+           regresar resp al llamador
+
+4. Resultados
+       segun (resp) empezar
+             caso 1:
+             caso 2:
+             caso 3:
+             caso 4:
+             caso 8:
+             caso 5:
+             caso 6:
+             caso 7:
+           terminar
+
+5. Navegabilidad:
+         hacer empezar
+                  Escribir("Menu de opciones")
+                  Escribir("_____________________________________________")
+                  Escribir("Elige el numero de prestacion que desea usar:")
+                  Escribir("_____________________________________________")
+                  Escribir("1. Adicion")
+                  Escribir("2. Sustraccion")
+                  Escribir("3. Multiplicacion")
+                  Escribir("4. Division")
+                  Escribir("5. Exponenciacion")
+                  Escribir("6. Negacion")
+                  Escribir("7. asignacion")
+                  Escribir("8. Comparacion")
+                  Escribe ("9. Salir")
+                  Escribe ("______________________________________________")
+                  Escribe ("Su eleccion:")
+                  resp = ?
+          terminar mientras (resp >= 1 and resp <= 9)
+          regresar resp al llamador
+
+   5.1 menuQI(): int
+         hacer empezar
+             Escribir ("usted puede hacer:")
+             Escribir ("______________________________________")
+             Escribir ("1. Aritmetica de quebrados")
+             Escribir ("2. Aritmetica de quebrados y enteros")
+             Escribir ("3. no hacer nada")
+             Escribir ("______________________________________")
+             Escribir ("Su eleccion: ")
+             op = ?
+         terminar mientras (op != 1 and op !=2 and op!= 3)
+         regresar op al llamador
