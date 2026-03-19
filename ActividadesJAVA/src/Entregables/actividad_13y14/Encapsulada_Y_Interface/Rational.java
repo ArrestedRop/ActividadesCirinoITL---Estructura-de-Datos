@@ -11,7 +11,7 @@ public class Rational implements Rationalizable {
         this.numerator = numerator;
         this.denominator = (denominator == 0) ? 1 : denominator;
     }
-
+    // Reductores
     public int getMCD(int num, int den){
         return (den==0) ? num : getMCD(den, num %den);
     }
@@ -102,7 +102,7 @@ public class Rational implements Rationalizable {
         return this;
     }
 
-    // --- COMPARISON (The logic you liked) ---
+    // --- COMPARADORES ---
     @Override
     public boolean equalsOperator(Rational r1, Rational r2) {
         return (r1.numerator * r2.denominator) == (r2.numerator * r1.denominator);
