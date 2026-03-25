@@ -23,24 +23,24 @@ public class Prueba {
 
     public void goal() {    //    1.- Meta
         String msg = "Programa que busca poner a prueba cada una de";
-
         msg += " las capacidades dentro del Abstract Data Type Rational";
+
         JOp.showMessageDialog(null,msg);
     }
 
     void aritmetica() {
         String msg = "1.- Aritmetica de quebrados\n";
-
         msg += "2.-Aritmetica de quebrados y enteros\n";
         msg += "3.- No hacer nada";
+
         opA = menu(msg,1,3);
         capturar2(opA);
     }
 
     void compara() {
         String msg = "1.- Igual\n2.- Mayor que\n3.- Menor que\n";
-
         msg += "4.- Mayor igual\n5.- Menor igual\n6.- No igual";
+
         opC = menu(msg, 1, 6);
         r1 = capturarRat();
         r2 = capturarRat();
