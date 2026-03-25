@@ -1,4 +1,4 @@
-package Entregables.actividad_13y14;
+package Entregables.actividad_13y14.Encapsulada_Y_Interface;
 
 public interface Rationalizable {
     Rational addition(Rational r1, Rational r2);

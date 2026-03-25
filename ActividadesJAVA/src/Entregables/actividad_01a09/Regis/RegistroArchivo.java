@@ -3,24 +3,15 @@ package Entregables.actividad_01a09.Regis;
 import Entregables.actividad_01a09.Persona;
 import javax.swing.JOptionPane;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class RegistroArchivo {
+public class RegistroArchivo { // Rgistrador de archivos
     private int cuenta = 0;
 
-    public Persona[] data(String archiv) {
+    public Persona[] data(String archiv) throws FileNotFoundException {
         this.cuenta = 0; // REINICIO VITAL para cada carga de archivo
-        int totalLines = 0;
-
-        try {
-            Scanner contador = new Scanner(new File(archiv));
-            while (contador.hasNextLine()) {
-                String l = contador.nextLine();
-                if (l != null && !l.trim().isEmpty()) {
-                    totalLines++;
-                }
-            }
-            contador.close();
+        int totalLines = lineCounter(archiv);
 
             Persona[] grupo = new Persona[totalLines];
 
@@ -46,14 +37,26 @@ public class RegistroArchivo {
             }
             lector.close();
             return grupo;
+        }
 
+    public int lineCounter(String archiv) { // CONTADOR DE LINEAS
+        int totalLines = 0;
+        try {
+            Scanner contador = new Scanner(new File(archiv));
+            while (contador.hasNextLine()) {
+                String l = contador.nextLine();
+                if (l != null && !l.trim().isEmpty()) {
+                    totalLines++;
+                }
+            }
+            contador.close();
+            return totalLines;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Error en archivo: " + e.getMessage());
-            return null;
+            return 0;
         }
     }
-
     public int getCuenta() {
         return this.cuenta;
     }

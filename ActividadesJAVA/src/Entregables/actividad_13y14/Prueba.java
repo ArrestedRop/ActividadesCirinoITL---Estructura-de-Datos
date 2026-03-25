@@ -11,11 +11,12 @@ Fecha: 4/3/2026
 */
 
 package Entregables.actividad_13y14;
+import Entregables.actividad_13y14.Encapsulada_Y_Interface.Rational;
 import javax.swing.*;
 import static Entregables.actividad_13y14.Misc.*;
 
 public class Prueba {
-    JOptionPane JOp = new JOptionPane();
+    static JOptionPane JOp = new JOptionPane();
     Rational r1, r2, r3;
     int i, exp, opA, opC;
     boolean operatorflag;
@@ -30,8 +31,8 @@ public class Prueba {
     void aritmetica() {
         String msg = "1.- Aritmetica de quebrados\n";
 
-        msg += "2.-Aritmetica de quebrados y enteros\n"
-        msg += "3.- No hacer nada"
+        msg += "2.-Aritmetica de quebrados y enteros\n";
+        msg += "3.- No hacer nada";
         opA = menu(msg,1,3);
         capturar2(opA);
     }

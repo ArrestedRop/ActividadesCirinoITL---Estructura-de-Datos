@@ -1,4 +1,4 @@
-package Entregables.actividad_13y14;
+package Entregables.actividad_13y14.Encapsulada_Y_Interface;
 
 public class Rational implements Rationalizable {
     private int numerator;

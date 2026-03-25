@@ -7,42 +7,41 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
 public class Misc {
+    private static JOptionPane jOP = new JOptionPane();
+    private static String err_msg = "Dato erroneo, por favor intentar de nuevo";
+    private static String tru_msg = "Dato guardado con exito";
 
     public static String fileSearcher() {
         JFileChooser searcher = new JFileChooser();
+        String format = "Archivos de datos (.txt, .csv)";
 
-        FileNameExtensionFilter filter = new FileNameExtensionFilter
-                ("Archivos de datos (.txt, .csv)", "txt", "csv");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(format, "txt", "csv");
         searcher.setFileFilter(filter);
         searcher.setAcceptAllFileFilterUsed(false);
         int selection  = searcher.showOpenDialog(null);
+
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = searcher.getSelectedFile();
             return file.getAbsolutePath();
         }
-        else
-            return "";
+        else return "";
     }
 
     public static String entryString(String prompt) {
-        String dato = JOptionPane.showInputDialog(null, prompt,
-                "Entrada de datos", JOptionPane.QUESTION_MESSAGE);
+        String dato = jOP.showInputDialog(null, prompt, "Entrada de datos", jOP.QUESTION_MESSAGE);
 
-        if (dato == null) {
-            return "";
-        }
+        if (dato == null) return "";
         return dato;
     }
 
     public static double entryDouble(String prompt) {
+
         while (true) {
             try {
                 String input = entryString(prompt);
                 return Double.parseDouble(input);
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Dato erroneo, " +
-                                "por favor intentar de nuevo",
-                        "Dato Errado", JOptionPane.ERROR_MESSAGE);
+                jOP.showMessageDialog(null,err_msg, "Dato Errado", jOP.ERROR_MESSAGE);
             }
         }
     }
@@ -52,14 +51,11 @@ public class Misc {
         boolean isValid = p.setfecha_nac(input);
 
         while(!isValid) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+            jOP.showMessageDialog(null, err_msg,"Error", jOP.ERROR_MESSAGE);
             input = entryString(prompt);
             isValid = p.setfecha_nac(input);
         }
-
-        JOptionPane.showMessageDialog(null,
-                "Dato guardado con exito","Confirmacion", JOptionPane.OK_OPTION );
+        jOP.showMessageDialog(null,tru_msg,"Confirmacion", jOP.OK_OPTION );
     }
 
     public static void nameChecker(String prompt, Persona p) {
@@ -67,13 +63,11 @@ public class Misc {
         boolean isValid = p.setNombre(input);
 
         while(!isValid) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                    " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+            jOP.showMessageDialog(null, err_msg,"Error", jOP.ERROR_MESSAGE);
             input = entryString(prompt);
             isValid = p.setNombre(input);
         }
-        JOptionPane.showMessageDialog(null,
-                "Dato guardado con exito","Confirmacion", JOptionPane.OK_OPTION );
+        jOP.showMessageDialog(null, tru_msg,"Confirmacion", jOP.OK_OPTION );
     }
 
     public static void heightChecker(String prompt, Persona p) {
@@ -81,13 +75,12 @@ public class Misc {
         boolean isValid = p.setEstatura(input);
 
         while(!isValid) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                    " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+
+            jOP.showMessageDialog(null, err_msg,"Error", jOP.ERROR_MESSAGE);
             input = entryDouble(prompt);
             isValid = p.setEstatura(input);
         }
-        JOptionPane.showMessageDialog(null,
-                "Dato guardado con exito","Confirmacion", JOptionPane.OK_OPTION );
+        jOP.showMessageDialog(null,tru_msg,"Confirmacion", jOP.OK_OPTION );
     }
 
     public static void weigthChecker(String prompt, Persona p) {
@@ -95,28 +88,29 @@ public class Misc {
         boolean isValid = p.setPeso(input);
 
         while(!isValid) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                    " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+            jOP.showMessageDialog(null, err_msg,"Error", jOP.ERROR_MESSAGE);
             input = entryDouble(prompt);
             isValid = p.setPeso(input);
         }
-        JOptionPane.showMessageDialog(null,
-                "Dato guardado con exito","Confirmacion", JOptionPane.OK_OPTION );
+        jOP.showMessageDialog(null, tru_msg,"Confirmacion", jOP.OK_OPTION );
     }
     public static void numChecker(String prompt, Persona p) {
         String input = entryString(prompt);
         boolean isValid = p.setNum_con(input);
 
         while(!isValid) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                    " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+            jOP.showMessageDialog(null, err_msg,"Error", jOP.ERROR_MESSAGE);
             input = entryString(prompt);
             isValid = p.setNum_con(input);
         }
-        JOptionPane.showMessageDialog(null,
-                "Dato guardado con exito","Confirmacion", JOptionPane.OK_OPTION );
+        jOP.showMessageDialog(null,tru_msg,"Confirmacion", jOP.OK_OPTION );
+    }
+    public static boolean isInt(String num) {
+    if (num == null||num.isEmpty()) return false;
+    else return true;
     }
 }
+
 
 
 
