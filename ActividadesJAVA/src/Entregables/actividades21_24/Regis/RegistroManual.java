@@ -1,14 +1,16 @@
-package Approach_MasProfesional.actividad_01a09.Regis;
+package Entregables.actividades21_24.Regis;
 
-import Approach_MasProfesional.actividad_01a09.Extras.Misc;
-import Entregables.actividad_01a09.Persona;
+
+
+import Entregables.actividades21_24.Persona;
+import Entregables.actividades21_24.extras.Miscellaneus.Misc;
 
 import javax.swing.*;
 
 public class RegistroManual {
     private int cuenta = 0;
 
-    public Persona[] data() {
+    public Persona[] dataManual() {
         cuenta = 0;
         Persona[] grupo = new Persona[25];
         String nom;
@@ -29,17 +31,13 @@ public class RegistroManual {
             }
     return grupo;
     }
+
     public int getCuenta() {
         return this.cuenta;
     }
     private Persona crearPersona(String nom) {
         Persona p = new Persona();
-
-
         Misc.numChecker("De # de control: ",p);
-        Misc.dateChecker("De Fecha de Nacimiento:",p);
-        Misc.weigthChecker("Peso de la persona:",p);
-        Misc.heightChecker("Estatura de la persona:",p);
         return p;
     }
 }

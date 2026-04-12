@@ -1,28 +1,31 @@
 package Entregables.actividad_01a09.Regis;
 
-import Entregables.actividad_01a09.Extras.Misc;
+import Approach_MasProfesional.actividad_01a09.Extras.Misc;
 import Entregables.actividad_01a09.Persona;
 
 import javax.swing.*;
 
 public class RegistroManual {
     private int cuenta = 0;
-    private JOptionPane jOP = new JOptionPane();
 
     public Persona[] data() {
         cuenta = 0;
         Persona[] grupo = new Persona[25];
         String nom;
 
-        nom = Misc.entryString("Proporcione el nom de la persona " +(cuenta+1)+ " o escriba \"fin\" para terminar");
+        nom = Misc.entryString("Proporcione el nom de la persona " +(cuenta+1)+
+                               "o escriba \"fin\" para terminar");
 
-        while (!nom.equalsIgnoreCase("fin") && this.cuenta < grupo.length) {
+        while (!nom.equalsIgnoreCase("fin")  && this.cuenta < grupo.length) {
             grupo[cuenta] = crearPersona(nom);
             this.cuenta++;
-            jOP.showMessageDialog(null, "Entregables.tarea_01.Persona registrada con exito");
+            JOptionPane.showMessageDialog(null,
+                    "Persona registrada con exito");
 
-                if (cuenta < grupo.length)
-                nom = Misc.entryString("Proporcione el nom de la persona " +(cuenta+1)+ "o escriba \"fin\" para terminar");
+                if (cuenta < grupo.length) {
+                nom = Misc.entryString("Proporcione el nom de la persona " +(cuenta+1)+
+                        "o escriba \"fin\" para terminar");
+                }
             }
     return grupo;
     }
@@ -31,6 +34,7 @@ public class RegistroManual {
     }
     private Persona crearPersona(String nom) {
         Persona p = new Persona();
+
 
         Misc.numChecker("De # de control: ",p);
         Misc.dateChecker("De Fecha de Nacimiento:",p);

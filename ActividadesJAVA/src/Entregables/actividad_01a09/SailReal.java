@@ -1,8 +1,8 @@
 package Entregables.actividad_01a09;
 
+import Approach_MasProfesional.actividad_01a09.Regis.RegistroArchivo;
+import Approach_MasProfesional.actividad_01a09.Regis.RegistroManual;
 import Entregables.actividad_01a09.Extras.Misc;
-import Entregables.actividad_01a09.Regis.RegistroArchivo;
-import Entregables.actividad_01a09.Regis.RegistroManual;
 import Entregables.actividad_01a09.Extras.Terminal;
 
 import javax.swing.*;
