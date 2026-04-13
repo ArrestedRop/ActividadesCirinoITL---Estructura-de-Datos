@@ -1,0 +1,53 @@
+1. METODO goal():
+   REGRESA "Código que busca poner a prueba las prestaciones del sorteo ShellSort."
+
+2. GESTIÓN DE DATOS:
+
+   2.1 METODO data(seleccion): // Captura según origen
+       SEGUN (seleccion) EMPEZAR
+           CASO 1: 
+               grupo = LLAMAR RegistroManual.dataManual()
+           CASO 2: 
+               ruta = LLAMAR IOManager.fileSearcher()
+               grupo = LLAMAR RegistroArchivo.dataArchivo(ruta)
+       TERMINAR
+
+3. ALGORITMOS Y PROCESOS:
+
+   3.1 METODO procesos(): // Ordenamiento por ShellSort
+       // Se asume que shellSort es una clase con el algoritmo implementado
+       grupoO = LLAMAR shellSort.sort(grupo)
+
+4. INTERFAZ Y SALIDA:
+
+   4.1 METODO results(seleccion): // Mostrar o Guardar
+       SEGUN (seleccion) EMPEZAR
+           CASO 3: // Salida a pantalla
+               ESCRIBE("--- RESULTADOS ORDENADOS ---")
+               DESDE i = 0 HASTA (grupoO.longitud - 1) EMPEZAR
+                   P = grupoO[i]
+                   ESCRIBE(P.getNumero() + " | " + P.getNombre())
+               TERMINAR
+           CASO 4: // Salida a archivo CSV
+               LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
+       TERMINAR
+
+   4.2 METODO navegacion(): // Menú de opciones
+       ESCRIBE("Seleccione una de las siguientes opciones:")
+       ESCRIBE("1.- Registro de datos manual")
+       ESCRIBE("2.- Registro de datos por archivo")
+       ESCRIBE("3.- Mostrar resultados ordenados en terminal")
+       ESCRIBE("4.- Pasar resultados ordenados a archivo")
+       ESCRIBE("5.- Salir")
+       RETORNAR LLAMAR IOManager.menuCreator(5)
+
+5. METODO main() [Controlador Principal]:
+   LLAMAR goal()
+   REPETIR EMPEZAR
+       opcion = LLAMAR navegacion()
+       SI (opcion != 5) EMPEZAR
+           LLAMAR data(opcion)
+           LLAMAR procesos()
+           LLAMAR results(opcion)
+       TERMINAR
+   MIENTRAS (opcion != 5)

@@ -64,11 +64,11 @@ public class Main {
         prueba.goal(terminal);
         do {
             option = prueba.navegacion();
-            if(option != 5) {
+            if (option != 5) {
                 prueba.data(option);
                 prueba.procesos(option);
                 prueba.results(option, terminal);
             }
-        }while(option != 5);
+        } while (option != 5);
     }
 }
