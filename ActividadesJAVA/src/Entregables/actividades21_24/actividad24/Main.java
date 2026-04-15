@@ -6,6 +6,8 @@ import Entregables.actividades21_24.Regis.RegistroManual;
 import Entregables.actividades21_24.extras.Miscellaneus.IOManager;
 import Entregables.actividades21_24.extras.Miscellaneus.Terminal;
 
+import javax.management.StringValueExp;
+
 public class Main {
     Persona[] grupo;
     Persona[] grupoO;
@@ -22,6 +24,7 @@ public class Main {
         switch(selection) {
             case 1 -> grupo = regisMan.dataManual();
             case 2 -> {
+                System.out.println("ENTRANDO AL CASO 2");
                 String path = IOManager.fileSearcher();
                 grupo = regisArc.dataArchivo(path);
             }
@@ -51,7 +54,7 @@ public class Main {
         msg.append("1.- Registro de datos manual\n");
         msg.append("2.- Registro de datos por archivo\n");
         msg.append("3.- Mostrar resultados ordenados en terminal\n");
-        msg.append("4.- Pasar resultados ordenados a archivo");
+        msg.append("4.- Pasar resultados ordenados a archivo\n");
         msg.append("5.- Salir");
         return IOManager.menuCreator(msg, 5);
     }

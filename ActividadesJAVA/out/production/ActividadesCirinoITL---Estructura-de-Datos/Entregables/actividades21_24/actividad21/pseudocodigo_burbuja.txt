@@ -1,0 +1,54 @@
+1. METODO goal():
+   REGRESA "Código que busca poner a prueba las prestaciones del sorteo burbuja."
+
+2. GESTIÓN DE DATOS:
+
+   2.1 METODO data(seleccion): // Captura según origen (Manual o Archivo)
+       SEGUN (seleccion) EMPEZAR
+           CASO 1: 
+               grupo = LLAMAR regisMan.dataManual()
+           CASO 2: 
+               ruta = LLAMAR IOManager.fileSearcher()
+               grupo = LLAMAR regisArc.dataArchivo(ruta)
+       TERMINAR
+
+3. ALGORITMOS Y PROCESOS:
+
+   3.1 METODO procesos(): // Ordenamiento por Método de Burbuja
+       // Se utiliza la clase bubbleSort para procesar el arreglo
+       grupoO = LLAMAR bubbleSort.sort(grupo)
+
+4. INTERFAZ Y SALIDA:
+
+   4.1 METODO results(seleccion): // Mostrar en pantalla o exportar
+       SEGUN (seleccion) EMPEZAR
+           CASO 3: // Listado en terminal
+               ESCRIBE("--- RESULTADOS ORDENADOS (BURBUJA) ---")
+               DESDE i = 0 HASTA (grupoO.longitud - 1) EMPEZAR
+                   P = grupoO[i]
+                   ESCRIBE(P.getNumero() + " | " + P.getNombre())
+               TERMINAR
+           CASO 4: // Escritura en archivo CSV
+               LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
+       TERMINAR
+
+   4.2 METODO navegacion(): // Menú interactivo
+       ESCRIBE("Seleccione una de las siguientes opciones:")
+       ESCRIBE("1.- Registro de datos manual")
+       ESCRIBE("2.- Registro de datos por archivo")
+       ESCRIBE("3.- Mostrar resultados ordenados en terminal")
+       ESCRIBE("4.- Pasar resultados ordenados a archivo")
+       ESCRIBE("5.- Salir")
+       RETORNAR LLAMAR IOManager.menuCreator(5)
+
+5. METODO main() [Controlador Principal]:
+   INSTANCIAR prueba COMO NUEVA Main()
+   LLAMAR prueba.goal()
+   REPETIR EMPEZAR
+       opcion = LLAMAR prueba.navegacion()
+       SI (opcion != 5) EMPEZAR
+           LLAMAR prueba.data(opcion)
+           LLAMAR prueba.procesos()
+           LLAMAR prueba.results(opcion)
+       TERMINAR
+   MIENTRAS (opcion != 5)

@@ -1,6 +1,6 @@
 package Entregables.actividad_01a09.Regis;
 
-import Approach_MasProfesional.actividad_01a09.Extras.Misc;
+import Entregables.actividad_01a09.Extras.Misc;
 import Entregables.actividad_01a09.Persona;
 
 import javax.swing.*;

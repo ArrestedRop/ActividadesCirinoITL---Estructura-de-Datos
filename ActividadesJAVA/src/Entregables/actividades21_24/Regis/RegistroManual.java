@@ -1,7 +1,5 @@
 package Entregables.actividades21_24.Regis;
 
-
-
 import Entregables.actividades21_24.Persona;
 import Entregables.actividades21_24.extras.Miscellaneus.Misc;
 

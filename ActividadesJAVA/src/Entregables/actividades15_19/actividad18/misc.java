@@ -5,6 +5,4 @@ public class misc {
         if (num == null||num.isEmpty()) return false;
         else return true;
     }
-
-
 }

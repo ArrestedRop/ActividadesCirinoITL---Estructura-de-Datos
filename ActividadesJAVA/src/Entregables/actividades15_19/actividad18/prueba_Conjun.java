@@ -7,7 +7,7 @@ import static Entregables.actividades15_19.actividad18.misc.*;
 
 public class prueba_Conjun {
     private Conjunto<?> set;
-    private <?> element;
+
 
     void dataType(int op1) {
         switch(op1) {
@@ -64,6 +64,6 @@ public class prueba_Conjun {
 
     public static void main(String[] args) {
 
-        
+
     }
 }

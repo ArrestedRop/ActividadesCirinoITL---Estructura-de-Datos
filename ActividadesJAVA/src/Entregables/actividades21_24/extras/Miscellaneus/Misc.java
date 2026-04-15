@@ -1,7 +1,5 @@
 package Entregables.actividades21_24.extras.Miscellaneus;
 
-
-
 import Entregables.actividades21_24.Persona;
 
 import javax.swing.*;
@@ -19,8 +17,7 @@ public class Misc {
     }
 
     public static String entryString(String prompt) {
-        String dato = JOptionPane.showInputDialog(null, prompt,
-                "Entrada de datos", JOptionPane.QUESTION_MESSAGE);
+        String dato = JOptionPane.showInputDialog(null, prompt);
 
         if (dato == null) {
             return "";
@@ -28,13 +25,11 @@ public class Misc {
         return dato;
     }
 
-
     public static void numChecker(String prompt, Persona p) {
         String input = entryString(prompt);
 
         while(!isInt(input) || !p.setNumero(Integer.parseInt(input))) {
-            JOptionPane.showMessageDialog(null, "Dato erroneo," +
-                    " intentelo de nuevo","Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Dato erroneo, intentelo de nuevo");
             input = entryString(prompt);
         }
         JOptionPane.showMessageDialog(null,"Dato guardado con exito");

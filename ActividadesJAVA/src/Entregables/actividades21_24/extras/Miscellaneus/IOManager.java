@@ -17,39 +17,45 @@ public class IOManager {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(format, "txt", "csv");
         searcher.setFileFilter(filter);
         searcher.setAcceptAllFileFilterUsed(false);
-        int selection  = searcher.showOpenDialog(null);
+        int selection = searcher.showOpenDialog(null);
 
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = searcher.getSelectedFile();
             return file.getAbsolutePath();
-        }
-        else return "";
+        } else return "";
     }
 
     public static void fileWritter(String path, Persona[] grupo) {
         try (PrintWriter writer = new PrintWriter(new File(path))) {
-            for(Persona p: grupo) {
+            for (Persona p : grupo) {
                 if (p != null) {
                     writer.println(p.getNumero() + "," + p.getNombre());
                 }
-                JOptionPane.showInputDialog("Archivo generado exitosamente; " + path);
             }
-        } catch(IOException e) {
-            System.err.println("Error" + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Archivo generado exitosamente en:\n" + path);
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
 
-    public static int menuCreator(StringBuilder msg, int quantiy) {
-        JOptionPane.showMessageDialog(null, msg);
+    public static int menuCreator(StringBuilder msg, int quantity) {
         String opcion;
         int op;
 
         do {
-            do {
-                opcion = JOptionPane.showInputDialog(msg);
-            } while (!isInt(opcion));
-            op = Integer.parseInt(opcion);
-        } while (op != quantiy);
-        return op;
+            opcion = JOptionPane.showInputDialog(null, msg);
+
+            if (opcion == null) return quantity;
+
+            if (isInt(opcion)) {
+                op = Integer.parseInt(opcion);
+
+                if (op >= 1 && op <= quantity) {
+                    return op;
+                }
+            }
+        } while (true);
     }
 }
