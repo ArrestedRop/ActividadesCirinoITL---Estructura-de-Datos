@@ -13,29 +13,29 @@ public class IOManager {
     public static String fileSearcher() {
         JFileChooser searcher = new JFileChooser();
         String format = "Archivos de datos (.txt, .csv)";
-
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(format, "txt", "csv");
-        searcher.setFileFilter(filter);
-        searcher.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(format,
+                                    "txt", "csv");
         int selection = searcher.showOpenDialog(null);
 
+        searcher.setFileFilter(filter);
+        searcher.setAcceptAllFileFilterUsed(false);
         if (selection == JFileChooser.APPROVE_OPTION) {
             File file = searcher.getSelectedFile();
+
             return file.getAbsolutePath();
         } else return "";
     }
 
     public static void fileWritter(String path, Persona[] grupo) {
-        try (PrintWriter writer = new PrintWriter(new File(path))) {
-            for (Persona p : grupo) {
-                if (p != null) {
-                    writer.println(p.getNumero() + "," + p.getNombre());
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Archivo generado exitosamente en:\n" + path);
+        JOptionPane jop = new JOptionPane();
+        String msg = "Archivo generado exitosamente en:\n";
 
+        try (PrintWriter writer = new PrintWriter(new File(path))) {
+            for (Persona p : grupo)
+                if (p != null) writer.println(p.getNumero() + "," + p.getNombre());
+            jop.showMessageDialog(null, msg + path);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            jop.showMessageDialog(null, "Error: " + e.getMessage());
             System.err.println("Error: " + e.getMessage());
         }
     }
@@ -46,15 +46,10 @@ public class IOManager {
 
         do {
             opcion = JOptionPane.showInputDialog(null, msg);
-
             if (opcion == null) return quantity;
-
             if (isInt(opcion)) {
                 op = Integer.parseInt(opcion);
-
-                if (op >= 1 && op <= quantity) {
-                    return op;
-                }
+                if (op >= 1 && op <= quantity) return op;
             }
         } while (true);
     }

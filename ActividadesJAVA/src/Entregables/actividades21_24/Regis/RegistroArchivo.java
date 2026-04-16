@@ -13,23 +13,21 @@ public class RegistroArchivo {
 
         try {
             Scanner contador = new Scanner(new File(archiv));
+
             while (contador.hasNextLine()) {
                 contador.nextLine();
                 totalLines++;
             }
             contador.close();
-
             Persona[] grupo = new Persona[totalLines];
             Scanner lector = new Scanner(new File(archiv));
             this.cuenta = 0;
-
             while (lector.hasNextLine()) {
                 String lineaActual = lector.nextLine();
                 String[] info = lineaActual.split(",");
 
                 if (info.length >= 2) {
                     Persona nPersona = new Persona();
-
                     boolean d1 = nPersona.setNumero(Integer.parseInt(info[0]));
                     boolean d2 = nPersona.setNombre(info[1]);
 
@@ -41,15 +39,14 @@ public class RegistroArchivo {
                 }
             }
             lector.close();
-
             return truncarArreglo(grupo, this.cuenta);
-
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Error al procesar el archivo"+ e.getMessage());
             return null;
         }
     }
+
     public int getCuenta() {
         return this.cuenta;
     }

@@ -9,13 +9,10 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public Persona() {
-    }
+    public Persona() {}
 
     public boolean setNumero(int numero) {
-        if(numero<0) {
-            return false;
-        }
+        if(numero<0) return false;
         else {
             this.numero = numero;
             return true;
@@ -32,7 +29,5 @@ public class Persona {
     }
 
     public int getNumero() {return numero;}
-
     public String getNombre() {return nombre;}
-
 }

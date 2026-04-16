@@ -6,9 +6,8 @@ import Entregables.actividades21_24.Regis.RegistroManual;
 import Entregables.actividades21_24.extras.Miscellaneus.IOManager;
 import Entregables.actividades21_24.extras.Miscellaneus.Terminal;
 
-import javax.management.StringValueExp;
 
-public class Main {
+public class ShellSort {
     Persona[] grupo;
     Persona[] grupoO;
     RegistroManual regisMan = new RegistroManual();
@@ -16,6 +15,7 @@ public class Main {
 
     public void goal(Terminal terminal) {
         String msg = "Codigo que busca poner a ";
+
         msg += "prueba las prestaciones del sorteo burbuja";
         terminal.imprimir(msg);
     }
@@ -32,7 +32,7 @@ public class Main {
     }
 
     public void procesos(int selection) {
-        grupoO = shellSort.sort(grupo);
+        grupoO = Sorter.sort(grupo);
     }
 
     public void results(int selection, Terminal terminal) {
@@ -60,7 +60,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main prueba = new Main();
+        ShellSort prueba = new ShellSort();
         Terminal terminal = new Terminal("Terminal de impresion");
         int option;
 
