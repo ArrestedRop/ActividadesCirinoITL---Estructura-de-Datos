@@ -1,6 +1,6 @@
 package Entregables.actividades21_24.actividad22;
 
-import Entregables.actividades21_24.Persona;
+import Entregables.actividades21_24.actividad24.Core.Persona;
 
 public class bubbleSort {
 

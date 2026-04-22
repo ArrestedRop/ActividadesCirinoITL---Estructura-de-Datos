@@ -1,4 +1,4 @@
-package Entregables.actividades21_24;
+package Entregables.actividades21_24.actividad24.Core;
 
 public class Persona {
     private int numero;

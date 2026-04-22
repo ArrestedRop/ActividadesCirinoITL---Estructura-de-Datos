@@ -1,6 +1,6 @@
-package Entregables.actividades21_24.extras.Miscellaneus;
+package Entregables.actividad_26.Utilities;
 
-import Entregables.actividades21_24.Persona;
+import Entregables.actividades21_24.actividad24.Core.Persona;
 
 import javax.swing.*;
 

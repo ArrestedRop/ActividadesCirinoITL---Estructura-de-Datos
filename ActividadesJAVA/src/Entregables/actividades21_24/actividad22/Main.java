@@ -1,9 +1,10 @@
 package Entregables.actividades21_24.actividad22;
 
-import Entregables.actividades21_24.Persona;
-import Entregables.actividades21_24.Regis.RegistroArchivo;
-import Entregables.actividades21_24.Regis.RegistroManual;
-import Entregables.actividades21_24.extras.Miscellaneus.*;
+import Entregables.actividades21_24.actividad24.Core.Persona;
+import Entregables.actividades21_24.actividad24.Core.RegistroArchivo;
+import Entregables.actividades21_24.actividad24.Core.RegistroManual;
+import Entregables.actividad_26.Utilities.IOManager;
+import Entregables.actividad_26.Utilities.Terminal;
 
 public class Main {
     Persona[] grupo;

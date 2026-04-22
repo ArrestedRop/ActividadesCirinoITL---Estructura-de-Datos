@@ -29,9 +29,11 @@ public class RegistroManual {
             }
     return grupo;
     }
+
     public int getCuenta() {
         return this.cuenta;
     }
+
     private Persona crearPersona(String nom) {
         Persona p = new Persona();
 

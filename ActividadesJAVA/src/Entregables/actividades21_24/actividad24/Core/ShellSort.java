@@ -1,17 +1,13 @@
-package Entregables.actividades21_24.actividad24;
+package Entregables.actividades21_24.actividad24.Core;
 
-import Entregables.actividades21_24.Persona;
-import Entregables.actividades21_24.Regis.RegistroArchivo;
-import Entregables.actividades21_24.Regis.RegistroManual;
-import Entregables.actividades21_24.extras.Miscellaneus.IOManager;
-import Entregables.actividades21_24.extras.Miscellaneus.Terminal;
-
+import Entregables.actividad_26.Utilities.IOManager;
+import Entregables.actividad_26.Utilities.Terminal;
 
 public class ShellSort {
-    Persona[] grupo;
-    Persona[] grupoO;
-    RegistroManual regisMan = new RegistroManual();
-    RegistroArchivo regisArc = new RegistroArchivo();
+    private Persona[] grupo;
+    private Persona[] grupoO;
+    private RegistroManual regisMan = new RegistroManual();
+    private RegistroArchivo regisArc = new RegistroArchivo();
 
     public void goal(Terminal terminal) {
         String msg = "Codigo que busca poner a ";
@@ -24,7 +20,6 @@ public class ShellSort {
         switch(selection) {
             case 1 -> grupo = regisMan.dataManual();
             case 2 -> {
-                System.out.println("ENTRANDO AL CASO 2");
                 String path = IOManager.fileSearcher();
                 grupo = regisArc.dataArchivo(path);
             }

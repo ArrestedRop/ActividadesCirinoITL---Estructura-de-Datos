@@ -1,6 +1,4 @@
-package Entregables.actividades21_24.actividad24;
-
-import Entregables.actividades21_24.Persona;
+package Entregables.actividades21_24.actividad24.Core;
 
 public class Sorter {
     public static Persona[] sort(Persona[] grupo) {
