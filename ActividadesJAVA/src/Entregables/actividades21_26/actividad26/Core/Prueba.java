@@ -1,0 +1,91 @@
+package Entregables.actividades21_26.actividad26.Core;
+
+import Entregables.actividades21_26.actividad26.utilities.IOManager;
+import Entregables.actividades21_26.actividad26.utilities.Terminal;
+
+public class Prueba {
+    private Persona[] grupo;
+    private Persona[] grupoO;
+    private RegistroManual regisMan = new RegistroManual();
+    private RegistroArchivo regisArc = new RegistroArchivo();
+
+    public void goal(Terminal terminal) {
+        String msg = "Codigo que busca poner a ";
+
+        msg += "prueba las prestaciones del sorteo burbuja";
+        terminal.imprimir(msg);
+    }
+
+    public void data(int selection) {
+        switch(selection) {
+            case 1 -> grupo = regisMan.dataManual();
+            case 2 -> {
+                String path = IOManager.fileSearcher();
+                grupo = regisArc.dataArchivo(path);
+            }
+        }
+    }
+
+    public Persona[] sort(Persona[] grupo) {
+        int n = grupo.length;
+
+        for (int gap = n / 2; gap > 0; gap /= 2) {
+
+            for (int i = gap; i < n; i++) {
+                Persona temp = grupo[i];
+                int j;
+
+                for (j = i; j >= gap && grupo[j - gap].getNumero() > temp.getNumero(); j -= gap) {
+                    grupo[j] = grupo[j - gap];
+                }
+
+                grupo[j] = temp;
+            }
+        }
+        return grupo;
+    }
+
+    public void procesos(int selection) {
+        grupoO = sort(grupo);
+    }
+
+    public void results(int selection, Terminal terminal) {
+        String msg;
+        switch(selection) {
+            case 3 -> {
+                for (int i = 0;i< grupoO.length;i++) {
+                    msg = grupoO[i].getNumero() + "\\|" + grupoO[i].getNombre();
+                    terminal.imprimir(msg);
+                }
+            }
+            case 4 -> IOManager.fileWritter("resultado_ordenado.csv", grupoO);
+        }
+    }
+
+    public int navegacion() {
+        StringBuilder msg = new StringBuilder();
+        msg.append("Seleccione una de las siguientes opciones\n ");
+        msg.append("1.- Registro de datos manual\n");
+        msg.append("2.- Registro de datos por archivo\n");
+        msg.append("3.- Mostrar resultados ordenados en terminal\n");
+        msg.append("4.- Pasar resultados ordenados a archivo\n");
+        msg.append("5.- Salir");
+        return IOManager.menuCreator(msg, 5);
+    }
+
+    public static void main(String[] args) {
+        Prueba prueba = new Prueba();
+        Terminal terminal = new Terminal("Terminal de impresion");
+        int option;
+
+        prueba.goal(terminal);
+        do {
+            option = prueba.navegacion();
+            if (option != 5) {
+                prueba.data(option);
+                prueba.procesos(option);
+                prueba.results(option, terminal);
+            }
+        } while (option != 5);
+    }
+}
