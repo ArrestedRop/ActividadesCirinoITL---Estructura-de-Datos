@@ -47,12 +47,11 @@
 
         REGRESAR i + 1
 
-   3.2 METODO procesos():
+   3.4 METODO procesos():
        // Se asume que shellSort es una clase con el algoritmo implementado
        grupoO = LLAMAR shellSort.sort(grupo)
 
-4. INTERFAZ Y SALIDA:
-
+4. SALIDA:
    4.1 METODO results(seleccion):
        SEGUN (seleccion) EMPEZAR
            CASO 3: // Salida a pantalla
@@ -65,7 +64,7 @@
                LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
        TERMINAR
 
-   4.2 METODO navegacion(): // Menú de opciones
+   5. METODO navegacion(): // Menú de opciones
        ESCRIBE("Seleccione una de las siguientes opciones:")
        ESCRIBE("1.- Registro de datos manual")
        ESCRIBE("2.- Registro de datos por archivo")
@@ -74,7 +73,7 @@
        ESCRIBE("5.- Salir")
        RETORNAR LLAMAR IOManager.menuCreator(5)
 
-5. METODO main() [Controlador Principal]:
+   5.1 METODO main() [Controlador Principal]:
    LLAMAR goal()
    REPETIR EMPEZAR
        opcion = LLAMAR navegacion()
