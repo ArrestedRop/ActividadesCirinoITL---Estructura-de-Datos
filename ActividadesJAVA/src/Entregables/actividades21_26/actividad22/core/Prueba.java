@@ -2,7 +2,7 @@ package Entregables.actividades21_26.actividad22.core;
 
 import Entregables.actividades21_26.actividad22.utilities.*;
 
-public class Main {
+public class Prueba {
     Persona[] grupo;
     Persona[] grupoO;
     RegistroManual regisMan = new RegistroManual();
@@ -53,7 +53,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main prueba = new Main();
+        Prueba prueba = new Prueba();
         Terminal terminal = new Terminal("Terminal de impresion");
         int option;
 

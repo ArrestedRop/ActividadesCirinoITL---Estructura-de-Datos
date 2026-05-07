@@ -1,7 +1,6 @@
 package Entregables.actividades15_19.actividad19;
 
 public class Prueba {
-    public class PruebaConjuntos {
 
         public static void main(String[] args) {
             // 1. Instanciamos dos conjuntos: A y B
@@ -50,5 +49,4 @@ public class Prueba {
             conjuntoA.toEmpty();
             System.out.println("¿A está vacío tras toEmpty()?: " + !conjuntoA.hasElt());
         }
-    }
 }
