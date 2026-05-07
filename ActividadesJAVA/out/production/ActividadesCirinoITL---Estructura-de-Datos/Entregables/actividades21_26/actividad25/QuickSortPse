@@ -1,0 +1,97 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 25
+Fecha: 15/4/2026
+*/
+
+1. METODO goal():
+   REGRESA "Código que busca poner a prueba las prestaciones del sorteo ShellSort."
+
+2. GESTIÓN DE DATOS:
+
+   2.1 METODO data(seleccion):
+       SEGUN (seleccion) EMPEZAR
+           CASO 1:
+               grupo = LLAMAR RegistroManual.dataManual()
+           CASO 2:
+               ruta = LLAMAR IOManager.fileSearcher()
+               grupo = LLAMAR RegistroArchivo.dataArchivo(ruta)
+       TERMINAR
+
+3. ALGORITMOS Y PROCESOS:
+   3.1 METODO sort(arrOriginal)
+        SI (arrOriginal == null) return null
+            arrClonado = arrOriginal.clone()
+            ejecutarQuickSort(arrClonado,0,arrClonado.length - 1)
+            REGRESA arrClonado
+        TERMINAR
+        REGRESA arrClonado
+
+   3.2 METODO ejecutarQuickSort(arr, low, high)
+       SI (low < high) ENTONCES
+           pi = particionar(arr, low, high)
+           ejecutarQuickSort(arr, low, pi - 1)
+           ejecutarQuickSort(arr, low, pi + 1, high)
+       TERMINAR
+
+   3.3 METODO particionar(arr, low, high)
+        pivot = arr[high].getNumero()
+        i = (low - 1)
+
+        PARA j = low HASTA (high - 1) EMPEZAR
+            SI (arr[j].getNumero() <= pivot) ENTONCES
+                i = i + 1
+                Persona temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            TERMINAR
+        TERMINAR
+
+        temp = arr[i + 1]
+        arr[i + 1] = arr[high]
+        arr[high] = temp
+
+        REGRESAR i + 1
+
+   3.4 METODO procesos():
+       // Se asume que shellSort es una clase con el algoritmo implementado
+       grupoO = LLAMAR shellSort.sort(grupo)
+
+4. SALIDA:
+   4.1 METODO results(seleccion):
+       SEGUN (seleccion) EMPEZAR
+           CASO 3: // Salida a pantalla
+               ESCRIBE("--- RESULTADOS ORDENADOS ---")
+               DESDE i = 0 HASTA (grupoO.longitud - 1) EMPEZAR
+                   P = grupoO[i]
+                   ESCRIBE(P.getNumero() + " | " + P.getNombre())
+               TERMINAR
+           CASO 4: // Salida a archivo CSV
+               LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
+       TERMINAR
+
+   5. METODO navegacion(): // Menú de opciones
+       ESCRIBE("Seleccione una de las siguientes opciones:")
+       ESCRIBE("1.- Registro de datos manual")
+       ESCRIBE("2.- Registro de datos por archivo")
+       ESCRIBE("3.- Mostrar resultados ordenados en terminal")
+       ESCRIBE("4.- Pasar resultados ordenados a archivo")
+       ESCRIBE("5.- Salir")
+       RETORNAR LLAMAR IOManager.menuCreator(5)
+
+   5.1 METODO main() [Controlador Principal]:
+   LLAMAR goal()
+   REPETIR EMPEZAR
+       opcion = LLAMAR navegacion()
+       SI (opcion != 5) EMPEZAR
+           LLAMAR data(opcion)
+           LLAMAR procesos()
+           LLAMAR results(opcion)
+       TERMINAR
+   MIENTRAS (opcion != 5)

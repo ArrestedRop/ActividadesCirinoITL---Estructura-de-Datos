@@ -1,3 +1,14 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 1-9
+Fecha: 4/3/2026
+*/
 
 1. METODO goal():
    REGRESA "Programa para gestionar una colección de 25 personas mediante
@@ -60,8 +71,7 @@
        TERMINAR
        RETORNAR -1
 
-4. INTERFAZ Y SALIDA:
-
+4. SALIDA:
    4.1 METODO listar():
        ESCRIBE("--- LISTADO DE PERSONAS ---")
        ESCRIBE("ID | CONTROL | NOMBRE | FECHA NAC | PESO | TALLA")
@@ -71,7 +81,7 @@
                    + P.getFNac() + " | " + P.getPeso() + " | " + P.getTalla())
        TERMINAR
 
-   4.2 METODO outs(pos, target):
+   5 METODO outs(pos, target):
        SI (pos != -1) EMPEZAR
            P = grupo[pos]
            ESCRIBE("Encontrado en posición: " + pos)
@@ -81,7 +91,7 @@
            ESCRIBE("La persona '" + target + "' no está en el registro.")
        TERMINAR
 
-5. METODO sail(): // Menú de Control Principal
+    5.1 METODO sail(): // Menú de Control Principal
    REPETIR EMPEZAR
        ESCRIBE("1. Captura Manual | 2. Cargar Archivo | 3. Listar")
        ESCRIBE("4. Busq. Secuencial | 5. Busq. Binaria | 6. Salir")

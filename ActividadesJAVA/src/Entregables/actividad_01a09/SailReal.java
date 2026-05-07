@@ -161,9 +161,11 @@ public class SailReal {
         int selection;
         do {
             selection = prueba.menu();
-        prueba.data(selection);
-        prueba.procesess(selection);
-        prueba.outs(selection);
-        }while(selection != 6);
+
+            if (selection == 1 || selection == 2) {prueba.data(selection);}
+            prueba.procesess(selection);
+            prueba.outs(selection);
+
+        } while(selection != 6);
     }
 }
