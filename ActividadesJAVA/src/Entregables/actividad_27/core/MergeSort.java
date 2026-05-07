@@ -1,7 +1,6 @@
 package Entregables.actividad_27.core;
 
-import Entregables.Actividad_28.utilities.IOManager;
-import Entregables.actividad_27.Utilities.Terminal;
+import Entregables.actividad_27.Utilities.*;
 import java.io.File;
 
 public class MergeSort {

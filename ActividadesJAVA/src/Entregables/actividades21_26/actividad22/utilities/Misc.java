@@ -1,6 +1,6 @@
 package Entregables.actividades21_26.actividad22.utilities;
 
-import Entregables.actividades21_26.actividad24.Core.Persona;
+import Entregables.actividades21_26.actividad22.core.Persona;
 
 import javax.swing.*;
 

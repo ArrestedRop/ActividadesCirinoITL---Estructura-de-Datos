@@ -3,7 +3,7 @@
 
 2. GESTIÓN DE DATOS:
 
-   2.1 METODO data(seleccion): // Captura según origen
+   2.1 METODO data(seleccion):
        SEGUN (seleccion) EMPEZAR
            CASO 1: 
                grupo = LLAMAR RegistroManual.dataManual()
@@ -14,13 +14,13 @@
 
 3. ALGORITMOS Y PROCESOS:
 
-   3.1 METODO procesos(): // Ordenamiento por ShellSort
-       // Se asume que shellSort es una clase con el algoritmo implementado
+   3.1 METODO procesos():
        grupoO = LLAMAR shellSort.sort(grupo)
+
 
 4. INTERFAZ Y SALIDA:
 
-   4.1 METODO results(seleccion): // Mostrar o Guardar
+   4.1 METODO results(seleccion):
        SEGUN (seleccion) EMPEZAR
            CASO 3: // Salida a pantalla
                ESCRIBE("--- RESULTADOS ORDENADOS ---")
@@ -32,7 +32,7 @@
                LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
        TERMINAR
 
-   4.2 METODO navegacion(): // Menú de opciones
+   4.2 METODO navegacion():
        ESCRIBE("Seleccione una de las siguientes opciones:")
        ESCRIBE("1.- Registro de datos manual")
        ESCRIBE("2.- Registro de datos por archivo")

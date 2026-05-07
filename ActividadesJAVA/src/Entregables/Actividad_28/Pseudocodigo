@@ -1,7 +1,0 @@
-1.METODODO goal()
-    REGRESA "Codigo que busca poner a prueba la mezcla directa"
-
-2.METODO data(Seleccion):
-    SEGUN (Seleccion) EMPEZAR
-        CASO 1:
-            LLAMAR

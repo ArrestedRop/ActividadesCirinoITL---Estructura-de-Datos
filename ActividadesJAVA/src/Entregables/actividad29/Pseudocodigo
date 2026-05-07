@@ -1,0 +1,128 @@
+METODO mezclaNatural(File f):
+    ordenado = Falso
+    File f1 = "ArchivoAux1"
+    File f2 = "ArchivoAux2"
+
+    // Se repite hasta que el archivo esté completamente ordenado
+    MIENTRAS (!ordenado) EMPEZAR
+        numSecuencias = distribute(f, f1, f2)
+
+        SI (numSecuencias <= 1) ENTONCES
+            ordenado = Verdadero
+        SINO
+            mix(f1, f2, f)
+        TERMINAR
+    TERMINAR
+FIN METODO
+
+METODO distribute(File f, File f1, File f2):
+    // Abrir flujos con Buffer y Data (Binario)
+    flujo  = Abrir(f)  para LECTURA
+    flujo1 = Abrir(f1) para ESCRITURA
+    flujo2 = Abrir(f2) para ESCRITURA
+
+    numSecuencias = 0
+    escribirEnF1 = Verdadero
+
+    TRATAR
+        anterior = flujo.readInt()
+        numSecuencias = 1
+        flujo1.writeInt(anterior) // Escribir primer elemento
+
+        MIENTRAS (Verdadero) EMPEZAR
+            actual = flujo.readInt()
+
+            // Si el orden se rompe, cambiamos de archivo auxiliar
+            SI (actual < anterior) ENTONCES
+                numSecuencias = numSecuencias + 1
+                escribirEnF1 = !escribirEnF1
+            TERMINAR
+
+            SI (escribirEnF1) ENTONCES
+                flujo1.writeInt(actual)
+            SINO
+                flujo2.writeInt(actual)
+            TERMINAR
+
+            anterior = actual
+        TERMINAR
+    CAPTURAR (FinDeArchivo):
+        // Solo para salir del ciclo
+    TERMINAR
+
+    CERRAR flujo, flujo1, flujo2
+    REGRESAR numSecuencias
+FIN METODO
+
+METODO mix(File f1, File f2, File f):
+    flujo  = Abrir(f)  para ESCRITURA
+    flujo1 = Abrir(f1) para LECTURA
+    flujo2 = Abrir(f2) para LECTURA
+
+    hayC1 = Falso, hayC2 = Falso
+
+    // Lecturas iniciales de cada auxiliar
+    TRATAR c1 = flujo1.readInt(), hayC1 = Verdadero CAPTURAR(EOF): hayC1 = Falso
+    TRATAR c2 = flujo2.readInt(), hayC2 = Verdadero CAPTURAR(EOF): hayC2 = Falso
+
+    MIENTRAS (hayC1 Y hayC2) EMPEZAR
+        finTramo1 = Falso, finTramo2 = Falso
+
+        // Fusionar dos tramos naturales comparando elementos
+        MIENTRAS (!finTramo1 Y !finTramo2) EMPEZAR
+            SI (c1 <= c2) ENTONCES
+                flujo.writeInt(c1)
+                ant = c1
+                TRATAR
+                    c1 = flujo1.readInt()
+                    SI (c1 < ant) ENTONCES finTramo1 = Verdadero
+                CAPTURAR (EOF):
+                    hayC1 = Falso, finTramo1 = Verdadero
+            SINO
+                flujo.writeInt(c2)
+                ant = c2
+                TRATAR
+                    c2 = flujo2.readInt()
+                    SI (c2 < ant) ENTONCES finTramo2 = Verdadero
+                CAPTURAR (EOF):
+                    hayC2 = Falso, finTramo2 = Verdadero
+            TERMINAR
+        TERMINAR
+
+        // Vaciar lo que quedó del tramo de f1
+        MIENTRAS (!finTramo1) EMPEZAR
+            flujo.writeInt(c1)
+            ant = c1
+            TRATAR
+                c1 = flujo1.readInt()
+                SI (c1 < ant) ENTONCES finTramo1 = Verdadero
+            CAPTURAR (EOF):
+                hayC1 = Falso, finTramo1 = Verdadero
+        TERMINAR
+
+        // Vaciar lo que quedó del tramo de f2
+        MIENTRAS (!finTramo2) EMPEZAR
+            flujo.writeInt(c2)
+            ant = c2
+            TRATAR
+                c2 = flujo2.readInt()
+                SI (c2 < ant) ENTONCES finTramo2 = Verdadero
+            CAPTURAR (EOF):
+                hayC2 = Falso, finTramo2 = Verdadero
+        TERMINAR
+    TERMINAR
+
+    // Vaciar registros sueltos si un archivo terminó antes que otro
+    MIENTRAS (hayC1) EMPEZAR
+        flujo.writeInt(c1)
+        TRATAR c1 = flujo1.readInt() CAPTURAR(EOF): hayC1 = Falso
+    TERMINAR
+
+    MIENTRAS (hayC2) EMPEZAR
+        flujo.writeInt(c2)
+        TRATAR c2 = flujo2.readInt() CAPTURAR(EOF): hayC2 = Falso
+    TERMINAR
+
+    CERRAR flujo, flujo1, flujo2
+FIN METODO
+

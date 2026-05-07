@@ -18,7 +18,7 @@
        // Se utiliza la clase bubbleSort para procesar el arreglo
        grupoO = LLAMAR bubbleSort.sort(grupo)
 
-4. INTERFAZ Y SALIDA:
+4.SALIDA:
 
    4.1 METODO results(seleccion): // Mostrar en pantalla o exportar
        SEGUN (seleccion) EMPEZAR
@@ -32,7 +32,7 @@
                LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
        TERMINAR
 
-   4.2 METODO navegacion(): // Menú interactivo
+   5 METODO navegacion(): // Menú interactivo
        ESCRIBE("Seleccione una de las siguientes opciones:")
        ESCRIBE("1.- Registro de datos manual")
        ESCRIBE("2.- Registro de datos por archivo")
@@ -41,14 +41,14 @@
        ESCRIBE("5.- Salir")
        RETORNAR LLAMAR IOManager.menuCreator(5)
 
-5. METODO main() [Controlador Principal]:
-   INSTANCIAR prueba COMO NUEVA Main()
-   LLAMAR prueba.goal()
-   REPETIR EMPEZAR
+   5.1METODO main() [Controlador Principal]:
+    INSTANCIAR prueba COMO NUEVA Main()
+    LLAMAR prueba.goal()
+    REPETIR EMPEZAR
        opcion = LLAMAR prueba.navegacion()
        SI (opcion != 5) EMPEZAR
            LLAMAR prueba.data(opcion)
            LLAMAR prueba.procesos()
            LLAMAR prueba.results(opcion)
        TERMINAR
-   MIENTRAS (opcion != 5)
+    MIENTRAS (opcion != 5)

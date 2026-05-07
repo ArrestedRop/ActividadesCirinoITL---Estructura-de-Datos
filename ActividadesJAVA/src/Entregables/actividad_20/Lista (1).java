@@ -1,17 +1,10 @@
-
-
-
-
-
-
-
-
-
-
+package Entregables.actividad_20;
 
 
 import java.util.Scanner;
 import java.io.*;
+
+// ActividadesJAVA/src/Entregables/actividad_20/AlumnosDS845
 
 class Lista {
   String name[] = new String [25];  // cadenas nulas
