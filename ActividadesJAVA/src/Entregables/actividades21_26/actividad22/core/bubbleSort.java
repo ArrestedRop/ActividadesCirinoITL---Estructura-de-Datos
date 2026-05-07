@@ -7,7 +7,6 @@ public class bubbleSort {
         int counter = 0;
         Persona temp;
 
-
         for(int i = 0; i<n; i++) {
             for (int j = 0;j<n-1;j++) {
                 if (grupo[j].getNumero() > grupo[j].getNumero()) {

@@ -1,3 +1,15 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 21
+Fecha: 4/3/2026
+*/
+
 1. METODO goal():
    REGRESA "Código que busca poner a prueba las prestaciones del sorteo burbuja."
 
@@ -14,9 +26,26 @@
 
 3. ALGORITMOS Y PROCESOS:
 
-   3.1 METODO procesos(): // Ordenamiento por Método de Burbuja
+   3.1 METODO bubbleSort(grupo)
+        n = grupo.length
+        counter = 0
+        temp
+
+        DESDE i = 0 HASTA n HACER:
+            DESDE j = 0 HASTA n - 1 HACER:
+                SI (grupo[i].getNumero() > grupo[j].getNumero()) ENTONCES
+                    emp = grupo[j];
+                    grupo[j] = grupo[j+1];
+                    grupo[j+1] = temp;
+                    counter++;
+                TERMINAR
+            TERMINAR
+        TERMINAR
+
+   3.2 METODO procesos(): // Ordenamiento por Método de Burbuja
        // Se utiliza la clase bubbleSort para procesar el arreglo
        grupoO = LLAMAR bubbleSort.sort(grupo)
+
 
 4.SALIDA:
 

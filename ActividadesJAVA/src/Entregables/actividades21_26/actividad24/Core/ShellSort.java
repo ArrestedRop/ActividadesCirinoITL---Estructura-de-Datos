@@ -1,3 +1,15 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 24
+Fecha: 25/3/2026
+*/
+
 package Entregables.actividades21_26.actividad24.Core;
 
 import Entregables.actividades21_26.actividad24.utilities.*;
@@ -29,7 +41,6 @@ public class ShellSort {
         int n = grupo.length;
 
         for (int gap = n / 2; gap > 0; gap /= 2) {
-
             for (int i = gap; i < n; i++) {
                 Persona temp = grupo[i];
                 int j;

@@ -1,3 +1,14 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 23
+Fecha: 25/3/2026
+*/
 1. METODO goal():
    REGRESA "Código que busca poner a prueba las prestaciones del sorteo ShellSort."
 
@@ -14,11 +25,27 @@
 
 3. ALGORITMOS Y PROCESOS:
 
-   3.1 METODO procesos():
+   3.1 METODO sort(grupo)
+            n = grupo.length
+
+            DESDE gap = n/2 HASTA gap > 0:
+                DESDE i = gap HASTA i < n:
+                    temp = grupo[i]
+                    j
+                    MIENTRAS (j >= gap Y grupo[j - gap].getNumero() > temp.getNumero()) EMPEZAR
+                        grupo[j] = grupo[j - gap]
+                    TERMINAR
+                grupo[j] = temp
+                TERMINAR
+            TERMINAR
+      REGRESAR grupo
+
+
+   3.2 METODO procesos():
        grupoO = LLAMAR shellSort.sort(grupo)
 
 
-4. INTERFAZ Y SALIDA:
+4. SALIDA:
 
    4.1 METODO results(seleccion):
        SEGUN (seleccion) EMPEZAR
@@ -32,7 +59,7 @@
                LLAMAR IOManager.fileWritter("resultado_ordenado.csv", grupoO)
        TERMINAR
 
-   4.2 METODO navegacion():
+   5. METODO navegacion():
        ESCRIBE("Seleccione una de las siguientes opciones:")
        ESCRIBE("1.- Registro de datos manual")
        ESCRIBE("2.- Registro de datos por archivo")
@@ -41,7 +68,7 @@
        ESCRIBE("5.- Salir")
        RETORNAR LLAMAR IOManager.menuCreator(5)
 
-5. METODO main() [Controlador Principal]:
+5.1 METODO main() [Controlador Principal]:
    LLAMAR goal()
    REPETIR EMPEZAR
        opcion = LLAMAR navegacion()

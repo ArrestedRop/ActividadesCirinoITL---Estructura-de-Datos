@@ -1,3 +1,15 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 17
+Fecha: 11/3/2026
+*/
+
 package Entregables.actividades15_19.actividad17;
 
 import java.util.*;

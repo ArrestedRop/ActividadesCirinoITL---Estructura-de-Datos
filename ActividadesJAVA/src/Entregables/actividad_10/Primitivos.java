@@ -1,4 +1,5 @@
 package Entregables.actividad_10;
+
 /*
 Tecnológico Nacional de México
 Instituto Tecnológico de León
@@ -8,8 +9,9 @@ Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
 Tarea 10
-Fecha: 6/3/2026
+Fecha: 4/3/2026
 */
+
 import Entregables.actividad_10.Extras.Terminal;
 public class Primitivos {
     public static void main(String[] args) {

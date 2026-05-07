@@ -1,41 +1,58 @@
-1. METODO goal()
-    REGRESA "Codigo que busca poner a prueba las prestaciones"
-    REGRESA "de un ADT Conjunto"
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 18
+Fecha: 11/3/2026
+*/
 
-2. GESTION DE DATOS:
-    2.1 METODO data()
-        SEGUN(seleccion) EMPEZAR
-        CASO 1
-3. ALGORITMOS Y PROCESOS:
-    3.1
+METODO main()
+    // 1. Instanciación de los objetos (Generics de Strings)
+    Conjunto<String> conjuntoA = NUEVO Conjunto()
+    Conjunto<String> conjuntoB = NUEVO Conjunto()
 
-4. RESULTADOS:
+    // 2. Registro de datos (Prueba de addElt y duplicados)
+    conjuntoA.addElt("Manzana")
+    conjuntoA.addElt("Pera")
+    conjuntoA.addElt("Uva")
+    conjuntoA.addElt("Manzana") // Intento de duplicado
 
-5. NAVEGACION:
-    5.1 METODO navegacion():
-        ESCRIBE("Seleccione una de las siguientes opciones")
-        ESCRIBE("1.- Crear conjunto")
-        ESCRIBE("2.- Copear conjunto")
-        ESCRIBE("3.- Añadir elemento")
-        ESCRIBE("4.- Eliminar elemento")
-        ESCRIBE("5.- Vaciar conjunto")
-        ESCRIBE("6.- Rastrear tamaño de conjunto")
-        ESCRIBE("7.- Rastrear un elemento dentro del un conjunto")
-    RETORNAR LLAMAR IOManager.menuCreator(7)
+    conjuntoB.addElt("Uva")
+    conjuntoB.addElt("Mango")
+    conjuntoB.addElt("Sandía")
 
-    5.2 METODO navegacionProc():
-        ESCRIBE("Seleccione una de las siguientes opciones")
-        ESCRIBE("1.- Union de conjuntos")
-        ESCRIBE("2.- Intersecccion de conjuntos")
-        ESCRIBE("3.- Diferencia de conjuntos")
-    RETORNAR LLAMAR IOManager.menuCreator(3)
+    // Mostrar estado inicial
+    IMPRIMIR "Conjunto A: " + (conjuntoA.hasElt() ? "Con datos" : "Vacío")
+    IMPRIMIR "Tamaño A: " + conjuntoA.size()
+    IMPRIMIR "Tamaño B: " + conjuntoB.size()
 
-    5.3 METODO main()
-        LLAMAR goal()
-        REPETIR EMPEZAR
-            opcion = LLAMAR navegacion()
-            LLAMAR
+    IMPRIMIR "--- PRUEBAS DE OPERACIONES ---"
 
+    // 3. Prueba de Unión (A + B)
+    Conjuntable<String> union = conjuntoA.union(conjuntoB)
+    IMPRIMIR "Unión (A + B) tamaño: " + union.size()
 
+    // 4. Prueba de Intersección (A ^ B)
+    Conjuntable<String> interseccion = conjuntoA.interseccion(conjuntoB)
+    IMPRIMIR "¿Intersección contiene 'Uva'?: " + interseccion.contains("Uva")
+
+    // 5. Prueba de Diferencia (A - B)
+    Conjuntable<String> diferencia = conjuntoA.diferens(conjuntoB)
+    IMPRIMIR "Diferencia (A - B) tamaño: " + diferencia.size()
+
+    // 6. Prueba de Relación (Subconjunto)
+    IMPRIMIR "¿A es subconjunto de Unión?: " + conjuntoA.subSet(union)
+
+    // 7. Prueba de Limpieza
+    conjuntoA.remElt("Pera")
+    IMPRIMIR "Tamaño A tras borrar 'Pera': " + conjuntoA.size()
+
+    conjuntoA.toEmpty()
+    IMPRIMIR "¿A está vacío tras toEmpty()?: " + !conjuntoA.hasElt()
+FIN METODO
 
 
