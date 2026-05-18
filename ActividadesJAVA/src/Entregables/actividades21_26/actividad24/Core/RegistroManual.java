@@ -13,16 +13,15 @@ public class RegistroManual {
         nom = Misc.entryString("Proporcione el nom de la persona " +(cuenta+1)+
                                "o escriba \"fin\" para terminar");
 
-// Cambia tu condición del while por esto:
         while (nom != null && !nom.equalsIgnoreCase("fin") && this.cuenta < grupo.length) {
             {
                 grupo[cuenta] = crearPersona(nom);
                 this.cuenta++;
 
-                if (cuenta < grupo.length) {
+                if (cuenta < grupo.length)
                     nom = Misc.entryString("Proporcione el nom de la persona " + (cuenta + 1) +
                             "o escriba \"fin\" para terminar");
-                }
+
             }
         }
     return truncarArreglo(grupo, this.cuenta);

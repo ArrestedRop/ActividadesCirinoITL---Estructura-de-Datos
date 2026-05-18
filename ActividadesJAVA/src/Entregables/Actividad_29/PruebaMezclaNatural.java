@@ -10,7 +10,7 @@ Tarea 29
 Fecha: 20/4/2026
 */
 
-package Entregables.actividad29;
+package Entregables.Actividad_29;
 
 import java.io.*;
 

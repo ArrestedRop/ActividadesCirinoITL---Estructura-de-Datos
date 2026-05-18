@@ -1,0 +1,128 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+3.3 METODO bubbleSort(int Arreglo[]):
+        SI (Arreglo[] == null) REGRESAR;
+        int n = Arreglo.lenght()
+        int temp = 0
+
+        DESDE i = 0 HASTA (n - 1) EMPEZAR:
+            DESDE j = 0 HASTA (n - i - 1) EMPEZAR:
+                SI (Arreglo[j] > Arreglo[j + 1]) ENTONCES:
+                    // Intercambio de elementos (Swap)
+                    temp = Arreglo[j]
+                    Arreglo[j] = Arreglo[j + 1]
+                    Arreglo[j + 1] = temp
+                TERMINAR SI
+            TERMINAR DESDE
+        TERMINAR DESDE
+    TERMINAR METODO
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+3.4 METODO shellSort(int Arreglo[]):
+        SI (Arreglo[] == null) REGRESAR;
+        int n = Arreglo.lenght()
+        int temp = 0
+        int j = 0
+
+        // Arrancamos con una brecha (gap) a la mitad del tamaño
+        DESDE brecha = n / 2 HASTA (brecha > 0) PASO brecha = brecha / 2 EMPEZAR:
+            DESDE i = brecha HASTA (n) EMPEZAR:
+                temp = Arreglo[i]
+                j = i
+                MIENTRAS (j >= brecha Y Arreglo[j - brecha] > temp) EMPEZAR:
+                    Arreglo[j] = Arreglo[j - brecha]
+                    j = j - brecha
+                TERMINAR MIENTRAS
+                Arreglo[j] = temp
+            TERMINAR DESDE
+        TERMINAR DESDE
+    TERMINAR METODO
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+3.5 METODO quickSort(int Arreglo[], int bajo, int alto):
+        SI (bajo < alto) ENTONCES:
+            // pi es el índice de partición
+            int pi = particion(Arreglo[], bajo, alto)
+
+            // Ordenamos recursivamente las dos mitades
+            quickSort(Arreglo[], bajo, pi - 1)
+            quickSort(Arreglo[], pi + 1, alto)
+        TERMINAR SI
+    TERMINAR METODO
+
+3.5.1 METODO int particion(int Arreglo[], int bajo, int alto):
+        int pivote = Arreglo[alto]
+        int i = (bajo - 1)
+        int temp = 0
+
+        DESDE j = bajo HASTA (alto) EMPEZAR:
+            SI (Arreglo[j] < pivote) ENTONCES:
+                i = i + 1
+                // Intercambio
+                temp = Arreglo[i]
+                Arreglo[i] = Arreglo[j]
+                Arreglo[j] = temp
+            TERMINAR SI
+        TERMINAR DESDE
+
+        // Intercambio final para acomodar el pivote
+        temp = Arreglo[i + 1]
+        Arreglo[i + 1] = Arreglo[alto]
+        Arreglo[alto] = temp
+
+        REGRESAR (i + 1)
+    TERMINAR METODO
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+3.6 METODO radixSort(int Arreglo[]):
+        SI (Arreglo[] == null) REGRESAR;
+        int n = Arreglo.lenght()
+
+        // 1. Encontrar el número máximo para saber cuántos dígitos tiene
+        int maximo = Arreglo[0]
+        DESDE i = 1 HASTA (n) EMPEZAR:
+            SI (Arreglo[i] > maximo) ENTONCES:
+                maximo = Arreglo[i]
+            TERMINAR SI
+        TERMINAR DESDE
+
+        // 2. Hacer counting sort para cada dígito.
+        // exp va multiplicándose por 10 (1, 10, 100...) para moverse de posición
+        DESDE exp = 1 HASTA (maximo / exp > 0) PASO exp = exp * 10 EMPEZAR:
+            countingSortPorDigito(Arreglo[], n, exp)
+        TERMINAR DESDE
+    TERMINAR METODO
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+3.6.1 METODO countingSortPorDigito(int Arreglo[], int n, int exp):
+        CREAR Int Salida[n]
+        CREAR Int Conteo[10] // Base 10 para los dígitos del 0 al 9
+        int temp = 0
+
+        // Inicializar conteo en 0
+        DESDE i = 0 HASTA (10) EMPEZAR:
+            Conteo[i] = 0
+        TERMINAR DESDE
+
+        // Almacenar el conteo de las ocurrencias de cada dígito
+        DESDE i = 0 HASTA (n) EMPEZAR:
+            int digito = (Arreglo[i] / exp) % 10
+            Conteo[digito] = Conteo[digito] + 1
+        TERMINAR DESDE
+
+        // Cambiar Conteo[i] para que contenga la posición real en Salida[]
+        DESDE i = 1 HASTA (10) EMPEZAR:
+            Conteo[i] = Conteo[i] + Conteo[i - 1]
+        TERMINAR DESDE
+
+        // Construir el arreglo de salida de atrás hacia adelante
+        DESDE i = (n - 1) HASTA (i >= 0) PASO i = i - 1 EMPEZAR:
+            int digito = (Arreglo[i] / exp) % 10
+            Salida[Conteo[digito] - 1] = Arreglo[i]
+            Conteo[digito] = Conteo[digito] - 1
+        TERMINAR DESDE
+
+        // Copiar el arreglo de salida al Arreglo[] original
+        DESDE i = 0 HASTA (n) EMPEZAR:
+            Arreglo[i] = Salida[i]
+        TERMINAR DESDE
+    TERMINAR METODO

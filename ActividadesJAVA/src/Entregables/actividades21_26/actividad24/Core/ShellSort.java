@@ -43,10 +43,11 @@ public class ShellSort {
         for (int gap = n / 2; gap > 0; gap /= 2) {
             for (int i = gap; i < n; i++) {
                 Persona temp = grupo[i];
-                int j;
+                int j = 0;
 
-                for (j = i; j >= gap && grupo[j - gap].getNumero() > temp.getNumero(); j -= gap) {
+                while (j >= gap && grupo[j - gap].getNumero() > temp.getNumero()) {
                     grupo[j] = grupo[j - gap];
+                    j -= gap;
                 }
 
                 grupo[j] = temp;
@@ -72,30 +73,37 @@ public class ShellSort {
         }
     }
 
-    public int navegacion() {
+    public void navegacion(Terminal terminal) {
+        int option;
         StringBuilder msg = new StringBuilder();
-        msg.append("Seleccione una de las siguientes opciones\n ");
+        msg.append("--- MENÚ DE GESTIÓN (ShellSort) ---\n");
         msg.append("1.- Registro de datos manual\n");
         msg.append("2.- Registro de datos por archivo\n");
         msg.append("3.- Mostrar resultados ordenados en terminal\n");
         msg.append("4.- Pasar resultados ordenados a archivo\n");
-        msg.append("5.- Salir");
-        return IOManager.menuCreator(msg, 5);
+        msg.append("5.- Salir\n");
+        msg.append("Seleccione una opción: ");
+
+        do {
+            option = IOManager.menuCreator(msg, 5);
+
+            if (option != 5) {
+                this.data(option);
+                this.procesos();
+                this.results(option, terminal);
+            } else {
+                System.out.println("Saliendo del programa...");
+            }
+
+        } while (option != 5);
     }
 
     public static void main(String[] args) {
         ShellSort prueba = new ShellSort();
         Terminal terminal = new Terminal("Terminal de impresion");
-        int option;
 
-        prueba.goal(terminal);
-        do {
-            option = prueba.navegacion();
-            if (option != 5) {
-                prueba.data(option);
-                prueba.procesos();
-                prueba.results(option, terminal);
-            }
-        } while (option != 5);
+        // El main ahora solo tiene dos responsabilidades:
+        prueba.goal(terminal);    // 1. Mostrar la meta
+        prueba.navegacion(terminal); // 2. Arrancar la navegación (ciclo completo)
     }
 }

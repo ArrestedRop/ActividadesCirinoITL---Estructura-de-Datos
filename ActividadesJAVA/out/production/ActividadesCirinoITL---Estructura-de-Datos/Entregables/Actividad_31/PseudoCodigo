@@ -1,0 +1,72 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 31
+Fecha: 12/5/2026
+*/
+
+Variables Globales
+1. METODO goal():
+    ESCRIBE "Script basico que permite medir el tiempo en cada una de los escenarios"
+    ESCRIBE "de los algoritmos de busqueda secuencial y binaria"
+
+2. METODO data(): //Generador datos
+    num
+    MIENTRAS (isNum(num)) EMPEZAR
+        ESCRIBE "Deme la cantidad de terminos que desea generar"
+        CAPTURAR num
+    TERMINAR
+   REGRESAR num
+   TERMINAR METODO
+
+2.1 METODO Int[] generador(): //GENERADOR
+       CREAR Int Arreglo[data()]
+       int num = 0
+
+       DESDE i = 0 HASTA (Arreglo.lenght()) EMPEZAR:
+            Arreglo[i] = num+1
+       TERMINAR
+    TERMINAR METODO
+
+
+3. Procesos
+3.1 METODO int searchSecuencial(int Arreglo[], int busq):
+        SI (Arreglo[] == null) REGRESAR -1;
+        DESDE i = 0 HASTA(Arreglo.lenght()) EMPEZAR:
+            SI (Arreglo[i] == 1) REGRESAR i;
+        TERMINAR
+    TERMINAR METODO
+
+3.2 METODO searchBinaria(int Arreglo[], int busq):
+       SI (Arreglo[] == null) REGRESAR -1;
+        int inicio = 0
+        int fin = (Arreglo.lenght() - 1)
+        int mitad = 0
+
+        MIENTRAS ( inicio <= fin) EMPEZAR:
+            mitad = inicio + (fin - inicio) / 2
+                SI (mitad == Arreglo[i]) ENTONCES:
+                    REGRESA mitad
+                SINO
+                    fin = mitad - 1
+
+4 SALIDA
+4.1 METODO table():
+        MS = search
+        PS =
+        PRS =
+        MB =
+        PB =
+        PRB =
+        ESCRIBE("COMPARACION MEJOR, PEOR Y PROMEDIO")
+        ESCRIBE("METODO DE BUSQUEDA  | MEJOR | PEOR | PROMEDIO")
+        ESCRIBE("BUSQUEDA SECUENCIAL | "
+
+
+
+

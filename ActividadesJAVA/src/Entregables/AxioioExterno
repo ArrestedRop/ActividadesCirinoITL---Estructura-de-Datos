@@ -1,0 +1,53 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+3.7 METODO intercalacionDirecta(Archivo fOriginal):
+        SI (fOriginal == null O fOriginal.estaVacio()) REGRESAR;
+
+        // Creamos los dos archivos auxiliares en el disco
+        Archivo f1 = CREAR_ARCHIVO("Aux1.dat")
+        Archivo f2 = CREAR_ARCHIVO("Aux2.dat")
+        int n = fOriginal.contarRegistros()
+        int bloqueSize = 1 // Arrancamos con bloques de tamaño 1
+
+        MIENTRAS (bloqueSize < n) EMPEZAR:
+            // 1. Fase de Partición: Dividir fOriginal en f1 y f2
+            fOriginal.abrirLectura()
+            f1.abrirEscritura()
+            f2.abrirEscritura()
+
+            MIENTRAS (NO fOriginal.finArchivo()) EMPEZAR:
+                // Copiar un bloque a f1
+                ESTO.copiarBloque(fOriginal, f1, bloqueSize)
+                // Copiar el siguiente bloque a f2
+                SI (NO fOriginal.finArchivo()) ENTONCES:
+                    ESTO.copiarBloque(fOriginal, f2, bloqueSize)
+                TERMINAR SI
+            TERMINAR MIENTRAS
+
+            fOriginal.cerrar()
+            f1.cerrar()
+            f2.cerrar()
+
+            // 2. Fase de Fusión: Mezclar f1 y f2 ordenadamente dentro de fOriginal
+            fOriginal.abrirEscritura()
+            f1.abrirLectura()
+            f2.abrirLectura()
+
+            ESTO.fusionarBloquesDirectos(f1, f2, fOriginal, bloqueSize)
+
+            fOriginal.cerrar()
+            f1.cerrar()
+            f2.cerrar()
+
+            // Duplicamos el tamaño del bloque para la siguiente pasada
+            bloqueSize = bloqueSize * 2
+        TERMINAR MIENTRAS
+    TERMINAR METODO
+
+3.7.1 METODO copiarBloque(Archivo origen, Archivo destino, int tamano):
+        int cont = 0
+        MIENTRAS (cont < tamano Y NO origen.finArchivo()) EMPEZAR:
+            destino.escribir(origen.leerDato())
+            cont = cont + 1
+        TERMINAR MIENTRAS
+    TERMINAR METODO
+/////////////////////////////////////////////////////////////////////////////////////////////////

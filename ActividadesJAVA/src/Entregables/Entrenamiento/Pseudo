@@ -1,0 +1,57 @@
+1.   META
+1.1 METODO goal():
+    ESCRIBIR("Codigo que busca poner a prueba cada una de las prestaciones")
+    ESCRIBIR("que comparte la clase encapsulada Registro paneles")
+
+2.   DATOS
+2.1 METODO RegistroPaneles data():
+        eficiencia = chequeador(eficiencia)
+        superficie = chequeador(superficie)
+        costoWatts = chequeador(costoWatts)
+        tipoCelda = PIDE("Proporcione el ipo de celda")
+        REGRESA RegistroPaneles(eficiencia, superficie, costoWatts, tipoCelda)
+    TERMINAR METODO
+
+2.2 METODO double chequeador(double dato):
+        ESCRIBIR("Proporcione " + dato)
+        HACER:
+            dato = PIDE("Proporcione " + dato)
+        MIENTRAS (Misc.booleanChecker(dato)) TERMINAR
+        REGRESAR dato
+    TERMINAR METODO
+
+3.   PROCESOS
+3.1 METODO processes(int selection, RegistroPaneles panel):
+        SEGUN (selection) ENTONCES:
+            CASO 1: P = panel.calcularPotencia()
+            CASO 2: CT = panel.calcularCostoTotal()
+        TERMINAR
+     TERMINAR METODO
+
+4.   SALIDAS
+4.1 METODO outs(int selection)
+        SEGUN (selection) ENTONCES:
+            CASO 1: ESCRIBE("Potencia calculada: " + P)
+            CASO 2: ESCRIBE("Costo total calculado: " + CT)
+            CASO 3:
+                msg =
+                ESCRIBE("Info")
+                TERMINAR
+             TERMINAR METODO
+
+5.   NAVEGABILIDAD
+5.1 METODO menuPrincipal():
+        msg = "Registre los datos necesarios para su panel solar porfavor"
+        ESCRIBIR msg
+    TERMINAR METODO
+
+5.2 METODO int menuFinal():
+        msg = "Eliga una de las opciones"
+        msg = "1.- Calcular Potencia"
+        msg = "2.- Calcular Costo Total"
+        msg = "3.-  Mostrar Info"
+        REGRESAR Misc.menuCreator(msg, 3)
+    TERMINAR METODO
+
+
+    

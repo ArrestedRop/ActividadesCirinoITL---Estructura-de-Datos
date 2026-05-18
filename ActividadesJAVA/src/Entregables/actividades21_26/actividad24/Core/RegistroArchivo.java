@@ -19,8 +19,7 @@ public class RegistroArchivo {
 
             return truncarArreglo(grupo, this.cuenta);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "Error al procesar el archivo"+ e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error"+ e.getMessage());
             return null;
         }
     }
@@ -37,7 +36,8 @@ public class RegistroArchivo {
         return totalLines;
     }
 
-    private Persona[] creator(String archiv, int totalLines) throws FileNotFoundException {
+    private Persona[]
+    creator(String archiv, int totalLines) throws FileNotFoundException {
         Persona[] grupo = new Persona[totalLines];
         Scanner lector = new Scanner(new File(archiv));
 
