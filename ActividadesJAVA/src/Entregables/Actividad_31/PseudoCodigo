@@ -20,12 +20,12 @@ int num
     ESCRIBE "de los algoritmos de busqueda secuencial y binaria"
 
 2. METODO data(): //Generador datos
+    CAPTURAR num
     MIENTRAS (isNum(num)) EMPEZAR
         ESCRIBE "Deme la cantidad de terminos que desea generar"
         CAPTURAR num
         int[] Arreglo1 = new Arreglo[num]
     TERMINAR
-   REGRESAR num
    TERMINAR METODO
 
 2.1 METODO generador(): //GENERADOR
@@ -100,10 +100,3 @@ int num
 
 METODO main():
     navigation()
-
-
-
-
-
-
-

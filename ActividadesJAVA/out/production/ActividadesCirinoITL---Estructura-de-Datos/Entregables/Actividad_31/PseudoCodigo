@@ -10,35 +10,38 @@ Tarea 31
 Fecha: 12/5/2026
 */
 
-Variables Globales
+Variables Globales:
+Long MS,PS,PRS,MB,PB,PRB
+int[] Arreglo
+int num
+
 1. METODO goal():
     ESCRIBE "Script basico que permite medir el tiempo en cada una de los escenarios"
     ESCRIBE "de los algoritmos de busqueda secuencial y binaria"
 
 2. METODO data(): //Generador datos
-    num
+    CAPTURAR num
     MIENTRAS (isNum(num)) EMPEZAR
         ESCRIBE "Deme la cantidad de terminos que desea generar"
         CAPTURAR num
+        int[] Arreglo1 = new Arreglo[num]
     TERMINAR
-   REGRESAR num
    TERMINAR METODO
 
-2.1 METODO Int[] generador(): //GENERADOR
-       CREAR Int Arreglo[data()]
-       int num = 0
+2.1 METODO generador(): //GENERADOR
+       CREAR Int Arreglo1[num]
 
-       DESDE i = 0 HASTA (Arreglo.lenght()) EMPEZAR:
+       DESDE i = 0 HASTA (Arreglo1.lenght()) EMPEZAR:
             Arreglo[i] = num+1
        TERMINAR
+       COPEAR Arreglo1[] A Arreglo[]
     TERMINAR METODO
 
-
-3. Procesos
-3.1 METODO int searchSecuencial(int Arreglo[], int busq):
+3. PROCESOS
+3.1 METODO searchSecuencial(int Arreglo[], int busq):
         SI (Arreglo[] == null) REGRESAR -1;
         DESDE i = 0 HASTA(Arreglo.lenght()) EMPEZAR:
-            SI (Arreglo[i] == 1) REGRESAR i;
+            SI (Arreglo[i] == busq) REGRESAR i;
         TERMINAR
     TERMINAR METODO
 
@@ -50,23 +53,50 @@ Variables Globales
 
         MIENTRAS ( inicio <= fin) EMPEZAR:
             mitad = inicio + (fin - inicio) / 2
-                SI (mitad == Arreglo[i]) ENTONCES:
+                SI ( == Arreglo[i]) ENTONCES:
                     REGRESA mitad
                 SINO
                     fin = mitad - 1
+        TERMINAR
+    TERMINAR METODO
 
 4 SALIDA
 4.1 METODO table():
-        MS = search
-        PS =
-        PRS =
-        MB =
-        PB =
-        PRB =
+        int n = Arreglo.lenght()
+        int mitad = n/2
+        MS = TElapser(Arreglo[], 0)
+        PS = TElapser(Arreglo[], Arreglo[mitad])
+        PRS = TElapserS(Arreglo[], -1)
+        MB = TElapserB(Arreglo[], Arreglo[mitad])
+        PB = TElapserB(Arreglo[], 2)
+        PRB = TElapserB(Arreglo[], -1)
+
         ESCRIBE("COMPARACION MEJOR, PEOR Y PROMEDIO")
         ESCRIBE("METODO DE BUSQUEDA  | MEJOR | PEOR | PROMEDIO")
-        ESCRIBE("BUSQUEDA SECUENCIAL | "
+        ESCRIBE("BUSQUEDA SECUENCIAL | MS    | PRS  | PS")
+        ESCRIBE("BUSQUEDA SECUENCIAL | MB    | PRB   | PB")
+    TERMINAR METODO
 
+4.2 METDO long TElapserS(int[] Arreglo, int val):
+        TimeElapsed crono = new TimeElapsed()
+        searchSecuencial(Arreglo[], val)
+        crono.calcula()
+        REGRESA crono.te
+    TERMINAR METODO
 
+4.2 METODO long TElapserB(int[] Arreglo, int val):
+        TimeElapsed crono = new TimeElapsed()
+        serchBinaria(Arreglo[], val)
+        crono.calcula()
+        REGRESA crono.te
+    TERMINAR METODO
 
+5 NAVEGACION
+5.1 METODO navigation():
+        goal()
+        data()
+        tabla()
+    TERMINAR METODO
 
+METODO main():
+    navigation()

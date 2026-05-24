@@ -1,0 +1,75 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Fecha: 1/6/2026
+*/
+
+Variables Globales:
+int orden
+float distancia
+
+1. METODO goal():
+    ESCRIBE "Script que dibuja la curva de Koch de manera recursiva (fractal)"
+    ESCRIBE "utilizando graficas de tortuga relativas (avanzar y girar)"
+
+2. METODO data(): //Generador datos
+    ESCRIBE "Deme el nivel de profundidad (orden) de la curva fractal:"
+    CAPTURAR orden
+    ESCRIBE "Deme la longitud en pixeles para el segmento inicial:"
+    CAPTURAR distancia
+   TERMINAR METODO
+
+3. PROCESOS
+3.1 METODO drawKoch(int nivel, float dist):
+        SI (nivel == 0) ENTONCES:
+            avanzar(dist)
+        SINO:
+            float nuevaDist = dist / 3.0
+
+            drawKoch(nivel - 1, nuevaDist)
+            gira(60)   // Girar a la izquierda
+
+            drawKoch(nivel - 1, nuevaDist)
+            gira(-120) // Girar a la derecha para bajar el pico
+
+            drawKoch(nivel - 1, nuevaDist)
+            gira(60)   // Girar a la izquierda para enderezar
+
+            drawKoch(nivel - 1, nuevaDist)
+        TERMINAR SI
+    TERMINAR METODO
+
+3.2 METODO avanzar(float dist):
+        // Lógica para mover el cursor en la direccion actual y pintar la linea
+        ESCRIBE "Avanzando " + dist + " unidades"
+    TERMINAR METODO
+
+3.3 METODO gira(int angulo):
+        // Lógica para rotar la dirección actual del cursor
+        ESCRIBE "Girando " + angulo + " grados"
+    TERMINAR METODO
+
+4 SALIDA
+4.1 METODO canvas():
+        ESCRIBE("INICIALIZANDO LIENZO GRAFICO PARA CURVA DE KOCH")
+        ESCRIBE("ORDEN | DISTANCIA")
+        ESCRIBE(orden + " | " + distancia)
+
+        // Se inicia el trazo con la distancia total capturada
+        drawKoch(orden, distancia)
+    TERMINAR METODO
+
+5 NAVEGACION
+5.1 METODO navigation():
+        goal()
+        data()
+        canvas()
+    TERMINAR METODO
+
+METODO main():
+    navigation()
