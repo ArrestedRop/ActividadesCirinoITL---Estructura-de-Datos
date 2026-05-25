@@ -1,74 +1,39 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "stack.h"
 
-#define MAX_SIZE 100
+// Initialize the stack by setting the top index to -1
+void initialize(Stack *stack) {stack->top = -1;}
 
-typedef struct {
-    int arr[MAX_SIZE];  
-    int top;        
-} Stack;
+// isEmpty returns the status of the stachm whether it is empty or not
+bool isEmpty(Stack *stack) {return stack->top == -1;}
 
-void initialize(Stack *stack) {
-    stack->top = -1;  
-}
+// isFull returns the status of the stacl, wether it is full or not
+bool isFull(Stack *stack) {return stack->top >= MAX_SIZE - 1;}
 
-bool isEmpty(Stack *stack) {
-    return stack->top == -1;  
-}
-
-bool isFull(Stack *stack) {
-    return stack->top >= MAX_SIZE - 1;  
-}
-
-void push(Stack *stack, int value) {
-    if (isFull(stack)) {
-        printf("Stack Overflow\n");
-        return;
-    }
+//Push function adds an element to the top of the stack
+void push(Stack *stack, void* value) 
+{
+    if (isFull(stack)) { printf("Stack Overflow\n"); return;}
     stack->arr[++stack->top] = value;
-    printf("Pushed %d onto the stack\n", value);
+    
+    printf("Se registro %p al stack\n", value);
 }
 
-int pop(Stack *stack) {
-    if (isEmpty(stack)) {
-        printf("Stack Underflow\n");
-        return -1;
-    }
-
+// Pop functiin removes the top element from the stack and returns it
+void pop(Stack *stack) 
+{
+    if (isEmpty(stack)) {printf("Stack Underflow\n");return;}
     int popped = stack->arr[stack->top];
+
     stack->top--;
-    printf("Popped %d from the stack\n", popped);
+    printf("Se elimino %d del stack\n", popped);
     return popped;
 }
 
-int peek(Stack *stack) {
-    if (isEmpty(stack)) {
-        printf("Stack is empty\n");
-        return -1;
-    }
+// Peek function returns the top element of the stack without removing it
+int peek(Stack *stack) 
+{
+    if (isEmpty(stack)) { printf("El stack esta vacio\n"); return -1;}
     return stack->arr[stack->top];
-}
-
-int main() {
-    Stack stack;
-    initialize(&stack);  
-
-    push(&stack, 3);
-    printf("Top element: %d\n", peek(&stack));
-
-    push(&stack, 5);
-    printf("Top element: %d\n", peek(&stack));
-
-    push(&stack, 2);
-    printf("Top element: %d\n", peek(&stack));
-
-    push(&stack, 8);
-    printf("Top element: %d\n", peek(&stack));
-
-    while (!isEmpty(&stack)) {
-        printf("Top element: %d\n", peek(&stack));
-        printf("Popped element: %d\n", pop(&stack));
-    }
-
-    return 0;
 }
