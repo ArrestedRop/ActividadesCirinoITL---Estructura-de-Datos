@@ -21,7 +21,6 @@ public class TablaComparativa {
 
 
     // 1 META
-
     void goal() {
         String msg = "Script basico que permite medir el tiempo\n";
         msg += "en cada uno de los escenarios de los \n";

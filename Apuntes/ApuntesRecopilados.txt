@@ -1,0 +1,21 @@
+####Sesión: 08 de Mayo, 2026 | Análisis de Eficiencia
+
+* **Eficiencia Algorítmica:** Es la forma en la que medimos qué tan bueno y optimizado es nuestro código.
+* **Big O Notation ($O(n)$):** Es la herramienta matemática que define el límite superior del rendimiento de un algoritmo. En español, la expresión $f(n) = O(g(n))$ simplemente describe cómo va a escalar tu programa a medida que le avientes más y más datos.
+* **¡Ojo con este detalle! (Corrección vital):** En tu libreta anotaste que la "Complejidad en el tiempo" es la cantidad de memoria que usa el programa. **Eso es incorrecto.** * **Time Complexity (Complejidad Temporal):** Mide el *tiempo* o los ciclos de reloj que tarda un programa en terminar.
+* **Space Complexity (Complejidad Espacial):** Mide la *cantidad de memoria RAM* que el algoritmo necesita para ejecutarse. ¡No los vayas a confundir!
+
+
+
+#### Sesión: 13 de Mayo, 2026 | Recursividad
+
+*(Referencia bibliográfica: Introduction to Java Programming por Y. Daniel Liang)*
+
+* **Procedimientos Recursivos (Recursion):** Es cuando un método se manda a llamar a sí mismo dentro de su propia ejecución para resolver un problema dividiéndolo en pedazos más pequeños (ej. calcular un Factorial).
+* Para que un método recursivo no destruya tu memoria (y no te reviente el stack de tu máquina virtual), requiere estrictamente dos partes:
+1. **Base Case (Caso Base o Solución Trivial):** Es la condición de freno. Cuando los datos cumplen esta condición (por ejemplo, `if (n == 0)`), la función deja de llamarse a sí misma y escupe un resultado directo.
+2. **Recursive Call (Paso Recursivo):** Si no se ha alcanzado el caso base, la función se vuelve a invocar, pero alterando los parámetros de entrada para acercarse cada vez más al final.
+
+
+* **Aplicaciones Prácticas:** La recursividad no es solo para matemáticas; es la herramienta definitiva para recorrer **Árboles (Trees)** en estructuras de datos, o para programar geometría fractal compleja, como la **Curva de Hilbert**.
+* **Ventaja principal:** A nivel de arquitectura, el código recursivo resulta mucho más declarativo, limpio y elegante a la vista en comparación con un ciclo `for` o `while` gigante.

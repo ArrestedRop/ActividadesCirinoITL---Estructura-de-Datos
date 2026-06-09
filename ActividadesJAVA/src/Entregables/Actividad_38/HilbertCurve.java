@@ -1,6 +1,6 @@
 package Entregables.Actividad_38;
 
-    /*
+/*
 Tecnológico Nacional de México
 Instituto Tecnológico de León
 Ingeniería en Sistemas Computacionales
@@ -11,85 +11,100 @@ Alumno: Villagomez Magaña Maximo Javier
 Tarea 31
 Fecha: 12/5/2026
 */
-
+import java.awt.Graphics;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-    public class HilbertCurve {
 
-        static int orden;
-        static float distancia;
-        static Scanner scanner = new Scanner(System.in);
+public class HilbertCurve extends JPanel {
+    static int orden;
+    static float distancia;
+    static Scanner scanner = new Scanner(System.in);
+    double tX;
+    double tY;
+    double anguloActual;
 
-        // 1. METAS
-        public static void goal() {
-            System.out.println("Script que dibuja la curva de Hilbert de manera recursiva (fractal)");
-            System.out.println("utilizando graficas de tortuga relativas (avanzar y girar)\n");
-        }
+    // 1. METAS
+    public static void goal() {
+        String msg = "Script que dibuja la curva de Hilbert gráficamente\n";
 
-        // 2. DATOS
-        public static void data() {
-            System.out.print("Deme el nivel de profundidad (orden) de la curva fractal: ");
-            while (!scanner.hasNextInt()) {
-                System.out.println("Entrada invalida. Por favor ingrese un numero entero.");
-                scanner.next();
-            }
-            orden = scanner.nextInt();
-
-            System.out.print("Deme la longitud en pixeles para cada segmento: ");
-            while (!scanner.hasNextFloat()) {
-                System.out.println("Entrada invalida. Por favor ingrese un numero decimal o entero.");
-                scanner.next();
-            }
-            distancia = scanner.nextFloat();
-        }
-
-        // 3. PROCESOS
-        public static void drawHilbert(int nivel, int angulo) {
-            if (nivel == 0) return;
-
-            gira(angulo);
-            drawHilbert(nivel - 1, -angulo);
-            avanzar(distancia);
-
-            gira(-angulo);
-            drawHilbert(nivel - 1, angulo);
-            avanzar(distancia);
-            drawHilbert(nivel - 1, angulo);
-
-            gira(-angulo);
-            avanzar(distancia);
-            drawHilbert(nivel - 1, -angulo);
-            gira(angulo);
-        }
-
-        // 3.2 METODO avanzar
-        public static void avanzar(float dist) {
-            System.out.println("Avanzando " + dist + " unidades");
-        }
-
-        // 3.3 METODO gira
-        public static void gira(int angulo) {
-            System.out.println("Girando " + angulo + " grados");
-        }
-
-        // 4. SALIDA
-        public static void canvas() {
-            System.out.println("\nINICIALIZANDO LIENZO GRAFICO PARA CURVA DE HILBERT...");
-            System.out.println("ORDEN | DISTANCIA");
-            System.out.println("  " + orden + "   |   " + distancia + "\n");
-
-            drawHilbert(orden, 90);
-        }
-
-        // 5. NAVEGACION
-        public static void navigation() {
-            goal();
-            data();
-            canvas();
-            scanner.close();
-        }
-
-        public static void main(String[] args) {
-            navigation();
-        }
+        msg += "utilizando JFrame y JPanel (Java Swing).\n";
+        System.out.println(msg);
     }
+
+    // 2. DATOS
+    public static void data() {
+        System.out.print("Deme el nivel (orden) de la curva fractal: ");
+        while (!scanner.hasNextInt()) {
+            String err = "Entrada invalida. Ingrese un numero entero.";
+            System.out.println(err);
+            scanner.next();
+        }
+        orden = scanner.nextInt();
+
+        System.out.print("Deme la longitud en pixeles (segmento): ");
+        while (!scanner.hasNextFloat()) {
+            String err = "Entrada invalida. Ingrese un numero decimal.";
+            System.out.println(err);
+            scanner.next();
+        }
+        distancia = scanner.nextFloat();
+    }
+
+    // 3. PROCESOS
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        tX = 20;
+        tY = 20;
+        anguloActual = 0;
+        drawHilbert(g, orden, 90);
+    }
+
+    public void drawHilbert(Graphics g, int nivel, int angulo) {
+        if (nivel == 0) return;
+        gira(angulo);
+        drawHilbert(g, nivel - 1, -angulo);
+        avanzar(g, distancia);
+        gira(-angulo);
+        drawHilbert(g, nivel - 1, angulo);
+        avanzar(g, distancia);
+        drawHilbert(g, nivel - 1, angulo);
+        gira(-angulo);
+        avanzar(g, distancia);
+        drawHilbert(g, nivel - 1, -angulo);
+        gira(angulo);
+    }
+
+    public void avanzar(Graphics g, float dist) {
+        double rad = Math.toRadians(anguloActual);
+        double nextX = tX + (dist * Math.cos(rad));
+        double nextY = tY + (dist * Math.sin(rad));
+
+        g.drawLine((int) tX, (int) tY, (int) nextX, (int) nextY);
+        tX = nextX;
+        tY = nextY;
+    }
+
+    public void gira(int angulo) {anguloActual += angulo;}
+
+    // 4. SALIDA
+    public static void canvas() {
+        System.out.println("\nINICIALIZANDO LIENZO GRAFICO...");
+        JFrame frame = new JFrame("Curva de Hilbert - Tortuga Grafica");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 800);
+        frame.add(new HilbertCurve());
+        frame.setVisible(true);
+    }
+
+    // 5. NAVEGACION
+    public static void navigation() {
+        goal();
+        data();
+        canvas();
+    }
+
+    public static void main(String[] args) {navigation();}
+}

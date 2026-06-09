@@ -1,0 +1,77 @@
+CLASE ClasePrueba
+    Inversion arr[5]
+    Scanner sc
+
+    METODO ClasePrueba():
+        DESDE i = 0 HASTA (4) EMPEZAR:
+            arr[i] = NUEVO Inversion()
+        TERMINAR DESDE
+        setArr()
+    TERMINAR METODO
+
+    // 1 META
+    METODO goal():
+        String msg = "Programa simple que nos permite guardar un grupo de \n"
+
+        msg = msg + "inversiones y manipularla ligeramente con sus propias "
+        msg = msg + "prestaciones\n"
+        IMPRIMIR(msg)
+    TERMINAR METODO
+
+    // 2 DATOS
+    METODO setArr():
+        arr[0].setAcciones("SpaceEx")
+        arr[1].setAcciones("Pollo Felix")
+        arr[2].setAcciones("Abarrotes DC")
+        arr[3].setAcciones("Bodega A")
+        arr[4].setAcciones("ITL")
+    TERMINAR METODO
+
+    // 3 PROCESOS
+    METODO proceses(int selection):
+        EN CASO DE (selection) EMPEZAR:
+            CASO 1: inversionData()
+            CASO 2: selling()
+        TERMINAR EN CASO
+    TERMINAR METODO
+
+    METODO inversionData():
+         String sen = ""
+         int opcion
+         String msg
+
+        MIENTRAS (sen NO ES IGUAL A "f" Y sen NO ES IGUAL A "F") EMPEZAR:
+            IMPRIMIR("\n--- MERCADO DE INVERSIONES ---")
+            opcion = mercado()
+            SI (opcion >= 1 Y opcion <= 5) ENTONCES:
+                invest(opcion - 1, arr[opcion - 1].getAcciones())
+            TERMINAR SI
+
+            msg = "Escriba 'f' para terminar el registro "
+            msg = msg + "u otra tecla para continuar:"
+            IMPRIMIR(msg)
+
+            sen = LEER_TEXTO()
+        TERMINAR MIENTRAS
+    TERMINAR METODO
+
+    METODO invest(int indexx, String share):
+        String amount
+
+        HACER EMPEZAR:
+            IMPRIMIR_FORMATO("Proporcione el monto a invertir en %s: ", share)
+            amount = LEER_TEXTO()
+        TERMINAR HACER MIENTRAS (NO Misc.isInt(amount))
+
+        arr[indexx].inversion(ConvertirADouble(amount))
+        IMPRIMIR_FORMATO("Usted ha invertido exitosamente en: %s\n", share)
+    TERMINAR METODO
+
+    METODO selling():
+        int option
+
+        IMPRIMIR("\n--- VENTA DE ACCIONES ---")
+        option = mercado()
+        SI (option >= 1 Y option <= 5) ENTONCES:
+            sell(option - 1, arr[option - 1].getAcciones())
+        TERMINAR SI

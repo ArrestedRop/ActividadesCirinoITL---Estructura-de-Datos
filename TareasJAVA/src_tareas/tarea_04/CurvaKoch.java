@@ -11,18 +11,6 @@ Tarea 4 (Curva Fractal - Curva de Koch)
 Fecha: 1/6/2026
 */
 
-/*
-Tecnológico Nacional de México
-Instituto Tecnológico de León
-Ingeniería en Sistemas Computacionales
-Estructuras de datos
-Lunes y miercoles 7:00 a 8:45
-viernes 7:00 a 7:50
-Alumno: Villagomez Magaña Maximo Javier
-Tarea 4 (Curva Fractal - Curva de Koch)
-Fecha: 1/6/2026
-*/
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Line2D;
@@ -30,7 +18,7 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-// Heredamos de JPanel para que esta clase actúe como nuestro lienzo de dibujo
+
 public class CurvaKoch extends JPanel {
     int orden;
     float distancia;
@@ -75,35 +63,33 @@ public class CurvaKoch extends JPanel {
     // 3. PROCESOS
     // 3.1 METODO drawKoch
     public void drawKoch(int nivel, float dist, Graphics2D g) {
-        if (nivel == 0) avanzar(dist, g);
+        if (nivel == 0) forward(dist, g);
         else {
             float nuevaDist = dist / 3.0f;
 
             drawKoch(nivel - 1, nuevaDist, g);
-            gira(60);   // Girar a la izquierda
+            turn(60);   // Girar a la izquierda
             drawKoch(nivel - 1, nuevaDist, g);
-            gira(-120); // Girar a la derecha para bajar el pico
+            turn(-120); // Girar a la derecha para bajar el pico
             drawKoch(nivel - 1, nuevaDist, g);
-            gira(60);   // Girar a la izquierda para enderezar
-
+            turn(60);   // Girar a la izquierda para enderezar
             drawKoch(nivel - 1, nuevaDist, g);
         }
     }
 
-    // 3.2 METODO avanzar
-    public void avanzar(float dist, Graphics2D g) {
+    // 3.2 METODO forward
+    public void forward(float dist, Graphics2D g) {
         float radianes = (float) Math.toRadians(currentAngle);
         float newX = currentX + dist * (float) Math.cos(radianes);
         float newY = currentY - dist * (float) Math.sin(radianes);
 
         g.draw(new Line2D.Float(currentX, currentY, newX, newY));
-
         currentX = newX;
         currentY = newY;
     }
 
     // 3.3 METODO gira
-    public void gira(int angulo) {currentAngle += angulo;}
+    public void turn(int angulo) {currentAngle += angulo;}
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -112,7 +98,6 @@ public class CurvaKoch extends JPanel {
         currentX = 100;
         currentY = getHeight() - 200;
         currentAngle = 0;
-
         drawKoch(orden, distancia, g2d);
     }
 
@@ -121,14 +106,12 @@ public class CurvaKoch extends JPanel {
     public void canvas() {
         String msg = "\nAbriendo la ventana grafica... ";
         System.out.println(msg);
-
         JFrame frame = new JFrame("Curva de Koch - Tarea 4");
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600); // Tamaño de la ventana
         frame.setLocationRelativeTo(null); // Centrar en la pantalla
-
         frame.add(this);
-
         frame.setVisible(true);
     }
 

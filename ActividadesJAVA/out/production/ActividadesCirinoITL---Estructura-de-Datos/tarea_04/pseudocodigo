@@ -6,16 +6,20 @@ Estructuras de datos
 Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
+Tarea 4 (Curva Fractal - Curva de Koch)
 Fecha: 1/6/2026
 */
 
 Variables Globales:
 int orden
 float distancia
+float currentX
+float currentY
+int currentAngle
 
 1. METODO goal():
     ESCRIBE "Script que dibuja la curva de Koch de manera recursiva (fractal)"
-    ESCRIBE "utilizando graficas de tortuga relativas (avanzar y girar)"
+    ESCRIBE "calculando coordenadas reales con senos y cosenos para una ventana grafica"
 
 2. METODO data(): //Generador datos
     ESCRIBE "Deme el nivel de profundidad (orden) de la curva fractal:"
@@ -45,22 +49,38 @@ float distancia
     TERMINAR METODO
 
 3.2 METODO avanzar(float dist):
-        // Lógica para mover el cursor en la direccion actual y pintar la linea
-        ESCRIBE "Avanzando " + dist + " unidades"
+        // Convertir grados a radianes para usar funciones trigonometricas
+        float radianes = currentAngle * (PI / 180.0)
+
+        // Calcular las nuevas coordenadas X y Y
+        float newX = currentX + (dist * COS(radianes))
+        float newY = currentY - (dist * SIN(radianes)) // Resta porque el eje Y va hacia abajo
+
+        // Trazar la linea en la interfaz grafica
+        DIBUJAR_LINEA(currentX, currentY, newX, newY)
+
+        // Actualizar la posicion de la tortuga
+        currentX = newX
+        currentY = newY
     TERMINAR METODO
 
 3.3 METODO gira(int angulo):
-        // Lógica para rotar la dirección actual del cursor
-        ESCRIBE "Girando " + angulo + " grados"
+        // Actualizar el angulo hacia donde apunta el trazador
+        currentAngle = currentAngle + angulo
     TERMINAR METODO
 
 4 SALIDA
 4.1 METODO canvas():
         ESCRIBE("INICIALIZANDO LIENZO GRAFICO PARA CURVA DE KOCH")
-        ESCRIBE("ORDEN | DISTANCIA")
-        ESCRIBE(orden + " | " + distancia)
 
-        // Se inicia el trazo con la distancia total capturada
+        // Configurar la posicion inicial de la tortuga en la pantalla
+        currentX = 100
+        currentY = 400
+        currentAngle = 0 // Apuntando al este (derecha)
+
+        ABRIR_VENTANA_GRAFICA()
+
+        // Se inicia el trazo recursivo
         drawKoch(orden, distancia)
     TERMINAR METODO
 
