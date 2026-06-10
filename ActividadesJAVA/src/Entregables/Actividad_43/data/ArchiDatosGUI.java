@@ -1,12 +1,9 @@
-/* ArchiDatosGUI.java
+package Entregables.Actividad_43.data;/* ArchiDatosGUI.java
    por Cirino Silva Tovar
    Diciembre 8 del 2008
    depurado 12 enero 2026
    Modificado el 10 de marzo del 2011 para que se comporte graficamente.
 */
-
-package data;
-
 import Entregables.Actividad_43.domain.*;
 import java.io.*;
 import java.util.*;

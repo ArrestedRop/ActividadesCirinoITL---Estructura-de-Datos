@@ -66,7 +66,6 @@ class Fibonacci {
 
     f.start();
     f.fibonacci();
-
     t.calcula();
     t.resulta();
   }

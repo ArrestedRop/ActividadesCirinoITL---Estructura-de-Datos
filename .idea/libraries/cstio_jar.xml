@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="cstio.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/cstio.jar.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/cstio.jar.zip!/" />
+    </SOURCES>
+  </library>
+</component>

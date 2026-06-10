@@ -65,7 +65,7 @@ public class IMCGUI {
   }
 
   public void calculos() {
-    Node temp = listIMC.first;
+    Node temp = listIMC.primero();
     IMC imct;
     double peso = 0, estatura = 0; 
     int i = 0;
@@ -96,7 +96,7 @@ public class IMCGUI {
   } 
 
   public void resultados() {
-    Node temp = listIMC.first;
+    Node temp = listIMC.primero();
     double peso = 0, e = 0;
     String n = "";
     int i = 0;
