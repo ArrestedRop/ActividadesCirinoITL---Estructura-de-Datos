@@ -10,6 +10,10 @@ Tarea 35
 Fecha: 6/5/2026
 */
 
+// Codigo extraido directamente del libro de Liang
+// Liang Introduction to Java Programming
+// en el capitulo 18 pagina 710
+
 package Entregables.Actividad_35;
 
 import java.util.Scanner;

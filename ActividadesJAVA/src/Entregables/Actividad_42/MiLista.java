@@ -1,89 +1,65 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 42
+Fecha: 27/5/2026
+*/
 package Entregables.Actividad_42;
 
-public class MiLista<E> implements ListaADT<E> {
-    private Object[] datos;
-    private int cantidad;
+public class MiLista<T> implements ListaADT<T> {
+    private Nodo<T> head;
+    private int size;
 
     public MiLista() {
-        this.datos = new Object[10]; // Capacidad inicial base
-        this.cantidad = 0;
-    }
-
-    public MiLista(int capacidad) {
-        if (capacidad <= 0) capacidad = 10;
-        this.datos = new Object[capacidad];
-        this.cantidad = 0;
-    }
-
-    public MiLista(MiLista<E> otra) {
-        this.datos = new Object[otra.datos.length];
-        this.cantidad = otra.cantidad;
-        for (int i = 0; i < cantidad; i++) this.datos[i] = otra.datos[i];
+        this.head = null;
+        this.size = 0;
     }
 
     @Override
-    public void insert(int index, E element) {
-        if (index < 0 || index > cantidad) return;
-        if (cantidad == datos.length) expandirMemoria();
-        for (int i = cantidad; i > index; i--) {datos[i] = datos[i - 1];}
-        datos[index] = element;
-        cantidad++;
-    }
+    public void insert(T dato) {
+        Nodo<T> nuevoNodo = new Nodo<>(dato);
 
-    @Override
-    @SuppressWarnings("unchecked")
-    public E remove(int index) {
-        if (index < 0 || index >= cantidad) return null;
-        E elementoEliminado = (E) datos[index];
-
-        for (int i = index; i < cantidad - 1; i++) {datos[i] = datos[i + 1];}
-        datos[cantidad - 1] = null;
-        cantidad--;
-        return elementoEliminado;
-    }
-
-    @Override
-    public void set(int index, E element) {
-        if (index >= 0 && index < cantidad) datos[index] = element;
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public E get(int index) {
-        if (index >= 0 && index < cantidad) return (E) datos[index];
-        return null;
-    }
-
-    @Override
-    public ListaADT<E> concatenar(ListaADT<E> otra) {
-        MiLista<E> nuevaLista = new MiLista<>(this.size() + otra.size());
-
-        for (int i = 0; i < this.size(); i++)
-            nuevaLista.insert(nuevaLista.size(), this.get(i));
-        for (int i = 0; i < otra.size(); i++)
-            nuevaLista.insert(nuevaLista.size(), otra.get(i));
-
-        return nuevaLista;
-    }
-
-    @Override
-    public boolean isEquals(ListaADT<E> otra) {
-        if (this.size() != otra.size()) return false;
-        for (int i = 0; i < this.size(); i++) {
-            if (!this.get(i).equals(otra.get(i))) return false;
+        if (head == null) head = nuevoNodo;
+        else {
+            Nodo<T> actual = head;
+            while (actual.getSiguiente()!=null) actual = actual.getSiguiente();
+            actual.setSiguiente(nuevoNodo);
         }
-        return true;
+        size++;
     }
 
     @Override
-    public int size() {return cantidad;}
+    public boolean remove(T dato) {
+        if (head == null) return false;
+        // Si el elemento a borrar es la cabeza
+        if (head.getDato().equals(dato)) {
+            head = head.getSiguiente();
+            size--;
+            return true;
+        }
+        // Buscar en el resto de la lista
+        Nodo<T> actual = head;
+        while (actual.getSiguiente() != null &&
+                !actual.getSiguiente().getDato().equals(dato)) {
+            actual = actual.getSiguiente();
+        }
+        // Si se encontro el elemento
+        if (actual.getSiguiente() != null) {
+            actual.setSiguiente(actual.getSiguiente().getSiguiente());
+            size--;
+            return true;
+        }
+        return false;
+    }
 
     @Override
-    public boolean isEmpty() {return cantidad == 0;}
+    public boolean isEmpty() {return size == 0;}
 
-    private void expandirMemoria() {
-        Object[] nuevoArreglo = new Object[datos.length * 2];
-        for (int i = 0; i < datos.length; i++) nuevoArreglo[i] = datos[i];
-        datos = nuevoArreglo;
-    }
+    @Override
+    public int getSize() {return size;}
 }

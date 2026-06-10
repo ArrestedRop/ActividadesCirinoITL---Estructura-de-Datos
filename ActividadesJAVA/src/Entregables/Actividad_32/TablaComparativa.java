@@ -7,7 +7,7 @@ Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
 Tarea 32
-Fecha: 12/5/2026
+Fecha: 6/5/2026
 */
 
 package Entregables.Actividad_32;
@@ -33,7 +33,7 @@ public class TablaComparativa {
     void data() {
         System.out.print("Deme la cantidad de terminos que desea generar: ");
         num = sc.nextLine();
-        while(!Misc.isInt(num)) {
+        while(!Misc.isInt(num) || Integer.parseInt(num) <= 0) {
             System.out.print("Dato erroneo, proporcione el dato de nuevo: ");
             num = sc.nextLine();
         }

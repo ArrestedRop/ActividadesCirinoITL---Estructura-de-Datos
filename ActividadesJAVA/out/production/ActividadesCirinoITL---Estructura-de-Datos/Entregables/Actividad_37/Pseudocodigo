@@ -6,67 +6,81 @@ Estructuras de datos
 Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
-Tarea 31
+Tarea 37
 Fecha: 12/5/2026
 */
 
 Variables Globales:
 int orden
 float distancia
+double tX
+double tY
+double anguloActual
 
 1. METODO goal():
-    ESCRIBE "Script que dibuja la curva de Hilbert de manera recursiva (fractal)"
-    ESCRIBE "utilizando graficas de tortuga relativas (avanzar y girar)"
+    ESCRIBE "Script que recibe el nivel y la longitud de pixeles "
+    ESCRIBE "para dibuja la curva de Hilbert gráficamente"
+    ESCRIBE "utilizando la forma de graficar que se ajuste a la aplicacion."
+   TERMINAR METODO
 
-2. METODO data(): //Generador datos
-    ESCRIBE "Deme el nivel de profundidad (orden) de la curva fractal:"
+2. METODO data():
+    ESCRIBE "Deme el nivel (orden) de la curva fractal: "
     CAPTURAR orden
-    ESCRIBE "Deme la longitud en pixeles para cada segmento:"
+    ESCRIBE "Deme la longitud en pixeles (segmento): "
     CAPTURAR distancia
    TERMINAR METODO
 
 3. PROCESOS
-3.1 METODO drawHilbert(int nivel, int angulo):
+3.1 METODO paintComponent(Graphics g):
+        tX = 20
+        tY = 20
+        anguloActual = 0
+        drawHilbert(g, orden, 90)
+    TERMINAR METODO
+
+3.2 METODO drawHilbert(Graphics g, int nivel, int angulo):
         SI (nivel == 0) REGRESAR;
 
         gira(angulo)
-        drawHilbert(nivel - 1, -angulo)
-        avanzar(distancia)
+        drawHilbert(g, nivel - 1, -angulo)
+        avanzar(g, distancia)
         gira(-angulo)
-        drawHilbert(nivel - 1, angulo)
-        avanzar(distancia)
-        drawHilbert(nivel - 1, angulo)
+        drawHilbert(g, nivel - 1, angulo)
+        avanzar(g, distancia)
+        drawHilbert(g, nivel - 1, angulo)
         gira(-angulo)
-        avanzar(distancia)
-        drawHilbert(nivel - 1, -angulo)
+        avanzar(g, distancia)
+        drawHilbert(g, nivel - 1, -angulo)
         gira(angulo)
     TERMINAR METODO
 
-3.2 METODO avanzar(float dist):
-        // Lógica para mover el cursor en la direccion actual y pintar la linea
-        ESCRIBE "Avanzando " + dist + " unidades"
+3.3 METODO avanzar(Graphics g, float dist):
+        rad = CONVERTIR_A_RADIANES(anguloActual)
+        nextX = tX + (dist * COSENO(rad))
+        nextY = tY + (dist * SENO(rad))
+
+        DIBUJAR_LINEA(tX, tY, nextX, nextY)
+        tX = nextX
+        tY = nextY
     TERMINAR METODO
 
-3.3 METODO gira(int angulo):
-        // Lógica para rotar la dirección actual del cursor
-        ESCRIBE "Girando " + angulo + " grados"
+3.4 METODO gira(int angulo):
+        anguloActual = anguloActual + angulo
     TERMINAR METODO
 
 4 SALIDA
 4.1 METODO canvas():
-        ESCRIBE("INICIALIZANDO LIENZO GRAFICO PARA CURVA DE HILBERT")
-        ESCRIBE("ORDEN | DISTANCIA")
-        ESCRIBE(orden + " | " + distancia)
-
-        // Se llama con el ángulo estándar de 90 grados para empezar
-        drawHilbert(orden, 90)
+        ESCRIBE "\nINICIALIZANDO LIENZO GRAFICO..."
+        CREAR VENTANA "Curva de Hilbert - Tortuga Grafica" (800x800)
+        AGREGAR LIENZO A VENTANA
+        MOSTRAR VENTANA
     TERMINAR METODO
 
 5 NAVEGACION
 5.1 METODO navigation():
         goal()
         data()
-        canvas()
+        canvas() // Esto eventualmente dispara paintComponent()
     TERMINAR METODO
 
 METODO main():

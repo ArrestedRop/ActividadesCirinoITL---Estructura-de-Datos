@@ -7,7 +7,7 @@ Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
 Tarea 30
-Fecha: 20/4/2026
+Fecha: 6/5/2026
 */
 package Entregables.Actividad_30;
 
@@ -16,8 +16,9 @@ import java.util.Scanner;
 class Fibonacci {
   Scanner t = new Scanner(System.in); // las declaraciones no se incluyen
                                       // en el conteo de instrucciones
-  void start() {                     
-    System.out.println("despliega la serie de numeros de Fibonacci");  
+
+  void start() {
+    System.out.println("despliega la serie de numeros de Fibonacci");
     System.out.println("famosa por la pelicula Codigo D'Vinci\n");       
   }
 
@@ -42,7 +43,8 @@ class Fibonacci {
   }
 
   void fibonacci() {  // calculus y resultados
-    int fnm1, fnm2, fn, n;                                              
+    int fnm1, fnm2, fn, n;
+    TimeElapsedMod t1 = new TimeElapsedMod();
                   
     fnm1 = fnm2 = fn = n = 0;                                           // 
     n = data();                                                         // 3  
@@ -58,16 +60,15 @@ class Fibonacci {
         System.out.print(", "+fn);                                      // n-1 
       }
     }
+    t1.calcula();
+    t1.resulta();
   }         // ojo suman 5*n + 3
 
   public static void main(String args[]) {
     Fibonacci f = new Fibonacci();
-    TimeElapsedMod t = new TimeElapsedMod();
 
     f.start();
     f.fibonacci();
-    t.calcula();
-    t.resulta();
   }
 }
 

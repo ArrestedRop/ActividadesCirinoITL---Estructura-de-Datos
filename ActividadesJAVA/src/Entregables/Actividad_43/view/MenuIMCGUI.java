@@ -1,4 +1,16 @@
-/* MenuIMCGUI.java 
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 43
+Fecha: 27/5/2026
+*/
+
+/* MenuIMCGUI.java
    clase que controla la aplicacion lista IMC grafico con persistencia
    Para ilustrar una aplicación de tres capas utiliza swing, 
    el 7 de noviembre del 2019

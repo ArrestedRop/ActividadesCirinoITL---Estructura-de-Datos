@@ -1,0 +1,169 @@
+CLASE TestMyArrayList
+    MyArrayList myList
+    Scanner sc
+
+    // 1 META
+    METODO meta():
+        String msg = "Este script permite manipular una lista\n"
+
+        msg = msg + "dinamica de forma interactiva utilizando las\n"
+        msg = msg + "prestaciones de la clase encapsulada MyArrayList.\n"
+        IMPRIMIR("--- PRUEBA INTERACTIVA DE MYARRAYLIST ---")
+        IMPRIMIR(msg)
+    TERMINAR METODO
+
+    // 2 DATOS
+    METODO datos(int n):
+        myList = NUEVO MyArrayList()
+        DESDE i = 0 HASTA (n - 1) EMPEZAR:
+            IMPRIMIR_FORMATO("Elemento [%d]: ", i)
+            myList.add(LEER_TEXTO())
+        TERMINAR DESDE
+    TERMINAR METODO
+
+    // 3 PROCESOS
+    METODO procesos(int opcion):
+        EN CASO DE (opcion) EMPEZAR:
+            CASO 1: agregarElemento()
+            CASO 2: reemplazarElemento()
+            CASO 3: eliminarElemento()
+            CASO 4: buscarContenido()
+            CASO 5: buscarIndice()
+            CASO 6: imprimirLista()
+        TERMINAR EN CASO
+    TERMINAR METODO
+
+    METODO agregarElemento():
+        int idx
+        String val
+
+        IMPRIMIR("Indice a inyectar: ")
+        SI (ENTRADA_ES_ENTERO()) ENTONCES:
+            idx = LEER_ENTERO()
+            IMPRIMIR("Valor a agregar: ")
+            val = LEER_TEXTO()
+
+            SI (idx >= 0 Y idx <= myList.size()) ENTONCES:
+                myList.add(idx, val)
+            SINO:
+                IMPRIMIR("[!] Error: Indice fuera de limites.")
+            TERMINAR SI
+        SINO:
+            IMPRIMIR("[!] Error: Indice invalido.")
+            DESCARTAR_ENTRADA()
+        TERMINAR SI
+    TERMINAR METODO
+
+    METODO reemplazarElemento():
+        int idx
+        String val
+
+        IMPRIMIR("Indice a reemplazar: ")
+        SI (ENTRADA_ES_ENTERO()) ENTONCES:
+            idx = LEER_ENTERO()
+            IMPRIMIR("Nuevo valor: ")
+            val = LEER_TEXTO()
+
+            SI (idx >= 0 Y idx < myList.size()) ENTONCES:
+                myList.set(idx, val)
+            SINO:
+                IMPRIMIR("[!] Error: Indice fuera de limites.")
+            TERMINAR SI
+        SINO:
+            IMPRIMIR("[!] Error: Indice invalido.")
+            DESCARTAR_ENTRADA()
+        TERMINAR SI
+    TERMINAR METODO
+
+    METODO eliminarElemento():
+        int idx
+
+        IMPRIMIR("Indice a eliminar: ")
+        SI (ENTRADA_ES_ENTERO()) ENTONCES:
+            idx = LEER_ENTERO()
+
+            SI (idx >= 0 Y idx < myList.size()) ENTONCES:
+                myList.remove(idx)
+            SINO:
+                IMPRIMIR("[!] Error: Indice fuera de limites.")
+            TERMINAR SI
+        SINO:
+            IMPRIMIR("[!] Error: Indice invalido.")
+            DESCARTAR_ENTRADA()
+        TERMINAR SI
+    TERMINAR METODO
+
+    METODO buscarContenido():
+        String val
+
+        IMPRIMIR("Elemento a buscar: ")
+        val = LEER_TEXTO()
+        IMPRIMIR_FORMATO("Resultado: %s\n", myList.contains(val))
+    TERMINAR METODO
+
+    METODO buscarIndice():
+        String val
+
+        IMPRIMIR("Elemento a buscar indice: ")
+        val = LEER_TEXTO()
+        IMPRIMIR_FORMATO("Indice: %d\n", myList.indexOf(val))
+    TERMINAR METODO
+
+    // 4 SALIDAS
+    METODO outPut():
+        String bye
+
+        IMPRIMIR("\n--- ESTADO FINAL ---")
+        IMPRIMIR_FORMATO("Lista: %s\n", myList.toString())
+        IMPRIMIR_FORMATO("Tamaño: %d\n", myList.size())
+
+        bye = "Saliendo del sistema de listas dinamicas... "
+        bye = bye + "¡Nos vemos, lobo de la programacion!"
+        IMPRIMIR(bye)
+    TERMINAR METODO
+
+    METODO imprimirLista():
+        IMPRIMIR_FORMATO("Lista: %s\n", myList.toString())
+    TERMINAR METODO
+
+    // 5 NAVEGACION
+    METODO principalMenu():
+        int opc
+
+        IMPRIMIR("\n--- MENU DE OPERACIONES ---")
+        IMPRIMIR("1. Agregar elemento (Inyectar)")
+        IMPRIMIR("2. Reemplazar elemento (Set)")
+        IMPRIMIR("3. Eliminar elemento (Remove)")
+        IMPRIMIR("4. Revisar si contiene")
+        IMPRIMIR("5. Buscar indice")
+        IMPRIMIR("6. Ver lista actual")
+        IMPRIMIR("7. Salir")
+        IMPRIMIR("Seleccione una opcion: ")
+
+        SI (ENTRADA_ES_ENTERO()) ENTONCES:
+            opc = LEER_ENTERO()
+            RETORNAR opc
+        SINO:
+            IMPRIMIR("[!] Error: Ingrese solo numeros para el menu.")
+            DESCARTAR_ENTRADA()
+            RETORNAR 0
+        TERMINAR SI
+    TERMINAR METODO
+
+    METODO run():
+        int opc = 0
+        int n = -1
+
+        meta()
+
+        HACER EMPEZAR:
+            IMPRIMIR("¿Cuantos elementos iniciales desea agregar?: ")
+            SI (ENTRADA_ES_ENTERO()) ENTONCES:
+                n = LEER_ENTERO()
+                SI (n < 0) ENTONCES:
+                    IMPRIMIR("No se permiten numeros negativos.")
+                TERMINAR SI
+            SINO:
+                IMPRIMIR("Entrada no valida, ingrese un numero entero.")
+                DESCARTAR_ENTRADA()
+            TERMINAR SI

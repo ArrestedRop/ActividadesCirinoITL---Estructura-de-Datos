@@ -1,0 +1,259 @@
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 32
+Fecha: 12/5/2026
+*/
+
+// --- VARIABLES GLOBALES ---
+ENTERO num
+ENTERO LARGO md, pd, prd, mn, pn, prn
+
+// ---------------------------------------------------------
+// 1. META
+// ---------------------------------------------------------
+MODULO goal()
+    IMPRIMIR "Script basico que permite medir el tiempo"
+    IMPRIMIR "en los escenarios mejor, peor y promedio de los"
+    IMPRIMIR "algoritmos de ordenamiento externo (Intercalacion Directa y Natural)"
+FIN MODULO
+
+// ---------------------------------------------------------
+// 2. DATOS
+// ---------------------------------------------------------
+MODULO data()
+    IMPRIMIR "Deme la cantidad de terminos que desea generar: "
+    LEER num
+    MIENTRAS (num NO SEA un numero entero valido) HACER
+        IMPRIMIR "Dato erroneo, proporcione el dato de nuevo: "
+        LEER num
+    FIN MIENTRAS
+FIN MODULO
+
+MODULO generador(ENTERO escenario, CADENA nombreArchivo)
+    ABRIR ARCHIVO nombreArchivo PARA ESCRITURA
+    ENTERO cantidad = CONVERTIR_A_ENTERO(num)
+
+    PARA i DESDE 0 HASTA cantidad - 1 HACER
+        SI (escenario == 1) ENTONCES
+            ESCRIBIR i EN ARCHIVO  // Mejor caso: Ordenado
+        SINO SI (escenario == 2) ENTONCES
+            ESCRIBIR NUMERO_ALEATORIO() EN ARCHIVO // Promedio: Desordenado
+        SINO
+            ESCRIBIR (cantidad - i) EN ARCHIVO // Peor caso: Inverso
+        FIN SI
+    FIN PARA
+    CERRAR ARCHIVO nombreArchivo
+FIN MODULO
+
+// ---------------------------------------------------------
+// 3. PROCESOS: INTERCALACIÓN DIRECTA
+// ---------------------------------------------------------
+MODULO intercalacionDirecta(CADENA fName)
+    ENTERO n = CONVERTIR_A_ENTERO(num)
+    ENTERO blockSize = 1
+
+    MIENTRAS (blockSize < n) HACER
+        LLAMAR particionarDirecta(fName, "F1.txt", "F2.txt", blockSize)
+        LLAMAR fusionarDirecta(fName, "F1.txt", "F2.txt", blockSize)
+        blockSize = blockSize * 2
+    FIN MIENTRAS
+FIN MODULO
+
+MODULO particionarDirecta(fName, f1Name, f2Name, blockSize)
+    ABRIR fName PARA LECTURA
+    ABRIR f1Name PARA ESCRITURA
+    ABRIR f2Name PARA ESCRITURA
+    BOOLEANO toggle = VERDADERO
+
+    MIENTRAS (NO FIN_DE_ARCHIVO(fName)) HACER
+        ARCHIVO_DESTINO = toggle ? f1Name : f2Name
+        PARA i DESDE 0 HASTA blockSize - 1 HACER
+            SI (NO FIN_DE_ARCHIVO(fName)) ENTONCES
+                LEER valor DE fName
+                ESCRIBIR valor EN ARCHIVO_DESTINO
+            FIN SI
+        FIN PARA
+        toggle = NO toggle
+    FIN MIENTRAS
+    CERRAR TODOS LOS ARCHIVOS
+FIN MODULO
+
+MODULO fusionarDirecta(fName, f1Name, f2Name, blockSize)
+    ABRIR f1Name, f2Name PARA LECTURA
+    ABRIR fName PARA ESCRITURA
+
+    LEER v1 DE f1Name
+    LEER v2 DE f2Name
+
+    MIENTRAS (NO FIN_DE_ARCHIVO(f1Name) Y NO FIN_DE_ARCHIVO(f2Name)) HACER
+        ENTERO count1 = 0, count2 = 0
+
+        MIENTRAS (count1 < blockSize Y count2 < blockSize Y HAY_DATOS) HACER
+            SI (v1 <= v2) ENTONCES
+                ESCRIBIR v1 EN fName
+                LEER SIGUIENTE v1; count1++
+            SINO
+                ESCRIBIR v2 EN fName
+                LEER SIGUIENTE v2; count2++
+            FIN SI
+        FIN MIENTRAS
+
+        MIENTRAS (count1 < blockSize Y HAY_DATOS_EN_F1) HACER
+            ESCRIBIR v1 EN fName; LEER SIGUIENTE v1; count1++
+        FIN MIENTRAS
+
+        MIENTRAS (count2 < blockSize Y HAY_DATOS_EN_F2) HACER
+            ESCRIBIR v2 EN fName; LEER SIGUIENTE v2; count2++
+        FIN MIENTRAS
+    FIN MIENTRAS
+
+    // Vaciar los sobrantes
+    MIENTRAS (HAY_DATOS_EN_F1) HACER ESCRIBIR v1 EN fName; LEER SIGUIENTE v1; FIN MIENTRAS
+    MIENTRAS (HAY_DATOS_EN_F2) HACER ESCRIBIR v2 EN fName; LEER SIGUIENTE v2; FIN MIENTRAS
+    CERRAR TODOS LOS ARCHIVOS
+FIN MODULO
+
+// ---------------------------------------------------------
+// 3. PROCESOS: INTERCALACIÓN NATURAL
+// ---------------------------------------------------------
+MODULO intercalacionNatural(CADENA fName)
+    BOOLEANO ordenado = FALSO
+    MIENTRAS (ordenado == FALSO) HACER
+        ordenado = LLAMAR particionarNatural(fName, "F1.txt", "F2.txt")
+        SI (ordenado == FALSO) ENTONCES
+            LLAMAR fusionarNatural(fName, "F1.txt", "F2.txt")
+        FIN SI
+    FIN MIENTRAS
+FIN MODULO
+
+MODULO particionarNatural(fName, f1Name, f2Name) RETORNA BOOLEANO
+    ABRIR fName PARA LECTURA, f1Name y f2Name PARA ESCRITURA
+    SI (FIN_DE_ARCHIVO(fName)) ENTONCES RETORNAR VERDADERO
+
+    BOOLEANO toggle = VERDADERO
+    BOOLEANO soloUnaSecuencia = VERDADERO
+    LEER prev DE fName
+    ESCRIBIR prev EN (toggle ? f1Name : f2Name)
+
+    MIENTRAS (NO FIN_DE_ARCHIVO(fName)) HACER
+        LEER curr DE fName
+        SI (curr < prev) ENTONCES
+            toggle = NO toggle
+            SI (toggle == FALSO) ENTONCES soloUnaSecuencia = FALSO
+        FIN SI
+        ESCRIBIR curr EN (toggle ? f1Name : f2Name)
+        prev = curr
+    FIN MIENTRAS
+    CERRAR ARCHIVOS
+    RETORNAR soloUnaSecuencia
+FIN MODULO
+
+MODULO fusionarNatural(fName, f1Name, f2Name)
+    ABRIR f1Name, f2Name PARA LECTURA
+    ABRIR fName PARA ESCRITURA
+    LEER v1 DE f1Name; LEER v2 DE f2Name
+
+    MIENTRAS (HAY_DATOS_EN_F1 Y HAY_DATOS_EN_F2) HACER
+        BOOLEANO end1 = FALSO, end2 = FALSO
+
+        MIENTRAS (NO end1 Y NO end2) HACER
+            SI (v1 <= v2) ENTONCES
+                ESCRIBIR v1 EN fName
+                SI (HAY_SIGUIENTE_EN_F1) ENTONCES
+                    LEER next; SI (next < v1) ENTONCES end1 = VERDADERO; v1 = next
+                SINO end1 = VERDADERO
+            SINO
+                ESCRIBIR v2 EN fName
+                SI (HAY_SIGUIENTE_EN_F2) ENTONCES
+                    LEER next; SI (next < v2) ENTONCES end2 = VERDADERO; v2 = next
+                SINO end2 = VERDADERO
+            FIN SI
+        FIN MIENTRAS
+
+        MIENTRAS (NO end1) HACER // Vaciar secuencia F1
+            ESCRIBIR v1 EN fName
+            LEER SIGUIENTE; ACTUALIZAR end1
+        FIN MIENTRAS
+        MIENTRAS (NO end2) HACER // Vaciar secuencia F2
+            ESCRIBIR v2 EN fName
+            LEER SIGUIENTE; ACTUALIZAR end2
+        FIN MIENTRAS
+    FIN MIENTRAS
+
+    // Vaciar archivos completos restantes
+    MIENTRAS (HAY_DATOS_F1) HACER ESCRIBIR v1; LEER SIGUIENTE v1 FIN MIENTRAS
+    MIENTRAS (HAY_DATOS_F2) HACER ESCRIBIR v2; LEER SIGUIENTE v2 FIN MIENTRAS
+    CERRAR ARCHIVOS
+FIN MODULO
+
+// ---------------------------------------------------------
+// 4. SALIDA
+// ---------------------------------------------------------
+MODULO formatoTiempo(ENTERO LARGO milisegundos) RETORNA CADENA
+    // Operaciones matemáticas para obtener horas, minutos, segundos y milisegundos
+    RETORNAR cadena_formateada_en_reloj
+FIN MODULO
+
+MODULO medirTiempoDirecta(ENTERO escenario) RETORNA ENTERO LARGO
+    CADENA archivo = "datos_directa.txt"
+    LLAMAR generador(escenario, archivo)
+    ENTERO LARGO inicio = OBTENER_TIEMPO_ACTUAL()
+    LLAMAR intercalacionDirecta(archivo)
+    ENTERO LARGO fin = OBTENER_TIEMPO_ACTUAL()
+    RETORNAR (fin - inicio)
+FIN MODULO
+
+MODULO medirTiempoNatural(ENTERO escenario) RETORNA ENTERO LARGO
+    CADENA archivo = "datos_natural.txt"
+    LLAMAR generador(escenario, archivo)
+    ENTERO LARGO inicio = OBTENER_TIEMPO_ACTUAL()
+    LLAMAR intercalacionNatural(archivo)
+    ENTERO LARGO fin = OBTENER_TIEMPO_ACTUAL()
+    RETORNAR (fin - inicio)
+FIN MODULO
+
+MODULO imprimirTabla()
+    IMPRIMIR "--- TABLA COMPARATIVA DE TIEMPOS (ARCHIVOS) ---"
+    IMPRIMIR "Escenario | Mezcla Directa | Mezcla Natural"
+    IMPRIMIR "Mejor Caso | " + formatoTiempo(md) + " | " + formatoTiempo(mn)
+    IMPRIMIR "Promedio   | " + formatoTiempo(pd) + " | " + formatoTiempo(pn)
+    IMPRIMIR "Peor Caso  | " + formatoTiempo(prd) + " | " + formatoTiempo(prn)
+    IMPRIMIR "Cantidad de datos en el archivo: " + num
+FIN MODULO
+
+// ---------------------------------------------------------
+// 5. NAVEGACIÓN (MAIN)
+// ---------------------------------------------------------
+MODULO PRINCIPAL run()
+    LLAMAR goal()
+    LLAMAR data()
+
+    IMPRIMIR "Calentando motores de la JVM (Dry Run)..."
+    CADENA originalNum = num
+    num = "1000"
+    LLAMAR medirTiempoDirecta(2)
+    LLAMAR medirTiempoNatural(2)
+    num = originalNum
+
+    IMPRIMIR "Calculando tiempos oficiales..."
+    md = LLAMAR medirTiempoDirecta(1)
+    pd = LLAMAR medirTiempoDirecta(2)
+    prd = LLAMAR medirTiempoDirecta(3)
+
+    mn = LLAMAR medirTiempoNatural(1)
+    pn = LLAMAR medirTiempoNatural(2)
+    prn = LLAMAR medirTiempoNatural(3)
+
+    LLAMAR imprimirTabla()
+
+    ELIMINAR_ARCHIVO("datos_directa.txt")
+    ELIMINAR_ARCHIVO("datos_natural.txt")
+    ELIMINAR_ARCHIVO("F1.txt")
+    ELIMINAR_ARCHIVO("F2.txt")
+FIN MODULO PRINCIPAL

@@ -1,9 +1,21 @@
-package Entregables.Actividad_33;
+/*
+Tecnológico Nacional de México
+Instituto Tecnológico de León
+Ingeniería en Sistemas Computacionales
+Estructuras de datos
+Lunes y miercoles 7:00 a 8:45
+viernes 7:00 a 7:50
+Alumno: Villagomez Magaña Maximo Javier
+Tarea 33
+Fecha: 6/5/2026
+*/
 
+package Entregables.Actividad_33;
 /* Transpuesta.java
-1.-Planteamiento: Para capturar datos en una matriz, trasponer y mostrar
-                  tanto la matriz original como su transformada, contabilizando
-                  las operaciones para comprobar un desempeño de O(n^2).
+1.-Planteamiento: Para capturar datos en una matriz, trasponer y
+                  mostrar tanto la matriz original como su transformada,
+                  contabilizando las operaciones para comprobar un
+                  desempeño de O(n^2).
 
 2.-Entradas: escribir("Deme el # de filas de su matriz:"); fil = ?
              escribir("Deme el # de columnas:"); col = ?
@@ -35,20 +47,22 @@ package Entregables.Actividad_33;
 
 */
 
-package Entregables.Actividad_33; // Update package if needed
 import java.io.*;
 import java.util.*;
 
 class Transpuesta {
     Scanner teclado = new Scanner(System.in);
     int fil, col;
-    long intercambios; // Variable to track operations
+    long intercambios;
     double matriz[][];
     double transp[][];
     Miscelanius m = new Miscelanius();
 
     public void inicio() {
-        System.out.println("\n\t Calcula LA TRANSPUESTA DE UNA MATRIZ Y COMPRUEBA O(n^2)");
+        String msg = "";
+
+        msg += "\n\t Calcula LA TRANSPUESTA DE UNA MATRIZ Y COMPRUEBA O(n^2)";
+        System.out.println(msg);
     }
 
     public double[][] entradas(double[][] otraCosa) {
@@ -60,14 +74,13 @@ class Transpuesta {
 
         otraCosa = new double[fil][col];
         for (int i=0; i<fil; i++) {
-            for (int j=0; j<col; j++) {
-                otraCosa[i][j] = m.capReal("Matriz[" +i+ ", "+j+ "]:");
-            }
+            for (int j=0; j<col; j++)
+                otraCosa[i][j] = m.capReal("Matriz[" + i + ", " + j + "]:");
         }
         return otraCosa;
     }
 
-    // 3 PROCESOS - Added counter for O(n^2) proof
+    // 3 PROCESOS
     public double[][] calculaTransp(int col, int fil) {
         transp = new double[col][fil];
         intercambios = 0;
@@ -83,29 +96,32 @@ class Transpuesta {
 
     public void mostrar(double[][] mat) {
         for (int j=0; j < mat.length; j++) {
-            for (int i=0; i < mat[j].length; i++) {
+            for (int i=0; i < mat[j].length; i++)
                 System.out.print(mat[j][i] + ", ");
-            }
             System.out.println();
         }
     }
 
     // 4 SALIDAS
     public void resultados() {
+        String msg = "";
+
         System.out.println("\n--- MATRIZ ORIGINAL ---");
         mostrar(matriz);
-
         System.out.println("\n--- MATRIZ TRANSPUESTA ---");
         mostrar(transp);
-
         System.out.println("\n=== ANÁLISIS DE COMPLEJIDAD O(n^2) ===");
         System.out.println("Filas (n): " + fil);
         System.out.println("Columnas (m): " + col);
+
         System.out.println("Operaciones teóricas máximas (n * m): " + (fil * col));
+
         System.out.println("Intercambios reales realizados: " + intercambios);
 
         if (intercambios == (fil * col)) {
-            System.out.println("Desempeño comprobado: O(n^2) - El algoritmo recorrió todos los elementos exitosamente.");
+            msg += "Desempeño comprobado: O(n^2) - El algoritmo recorrió ";
+            msg += "todos los elementos exitosamente.";
+            System.out.println(msg);
         }
     }
 
