@@ -27,6 +27,7 @@ public class TablaComparativa {
 
         msg += "en los escenarios mejor, peor y promedio de los \n";
         msg += "algoritmos de busqueda secuencial y binaria\n";
+        msg += "ademas de imprimirlo en forma de tabla comparativa\n";
         System.out.println(msg);
     }
 

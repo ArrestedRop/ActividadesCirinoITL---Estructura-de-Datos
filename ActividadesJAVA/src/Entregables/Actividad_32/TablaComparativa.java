@@ -24,8 +24,10 @@ public class TablaComparativa {
     // 1 META
     void goal() {
         String msg = "Script basico que permite medir el tiempo\n";
+
         msg += "en los escenarios mejor, peor y promedio de los \n";
         msg += "algoritmos de ordenamiento externo (Intercalacion Directa y Natural)\n";
+        msg += "ademas de imprimirlo en forma de tabla comparativa\n";
         System.out.println(msg);
     }
 
