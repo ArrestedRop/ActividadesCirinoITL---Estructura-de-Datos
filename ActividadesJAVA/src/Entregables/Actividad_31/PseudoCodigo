@@ -7,96 +7,127 @@ Lunes y miercoles 7:00 a 8:45
 viernes 7:00 a 7:50
 Alumno: Villagomez Magaña Maximo Javier
 Tarea 31
-Fecha: 12/5/2026
+Fecha: 5/6/2026
 */
 
-Variables Globales:
-Long MS,PS,PRS,MB,PB,PRB
-int[] Arreglo
-int num
+ENTERO LARGO ms, ps, prs, mb, pb, prb
+ARREGLO DE ENTEROS arreglo
+CADENA num
 
-1. METODO goal():
-    ESCRIBE "Script basico que permite medir el tiempo en cada una de los escenarios"
-    ESCRIBE "de los algoritmos de busqueda secuencial y binaria"
+// 1. META
+MODULO goal()
+    IMPRIMIR "Script basico que permite medir el tiempo"
+    IMPRIMIR "en los escenarios mejor, peor y promedio de los "
+    IMPRIMIR "algoritmos de busqueda secuencial y binaria"
+    IMPRIMIR "ademas de imprimirlo en forma de tabla comparativa"
+FIN MODULO
 
-2. METODO data(): //Generador datos
-    CAPTURAR num
-    MIENTRAS (isNum(num)) EMPEZAR
-        ESCRIBE "Deme la cantidad de terminos que desea generar"
-        CAPTURAR num
-        int[] Arreglo1 = new Arreglo[num]
-    TERMINAR
-   TERMINAR METODO
+// 2. DATOS
+MODULO data()
+    IMPRIMIR "Deme la cantidad de terminos que desea generar: "
+    LEER num
+    MIENTRAS (num NO SEA un numero entero valido O CONVERTIR_A_ENTERO(num) <= 0) HACER
+        IMPRIMIR "Dato erroneo, proporcione el dato de nuevo: "
+        LEER num
+    FIN MIENTRAS
+    arreglo = CREAR ARREGLO DE TAMAÑO CONVERTIR_A_ENTERO(num)
+FIN MODULO
 
-2.1 METODO generador(): //GENERADOR
-       CREAR Int Arreglo1[num]
+MODULO generador()
+    PARA i DESDE 0 HASTA TAMAÑO(arreglo) - 1 HACER
+        arreglo[i] = i
+    FIN PARA
+FIN MODULO
 
-       DESDE i = 0 HASTA (Arreglo1.lenght()) EMPEZAR:
-            Arreglo[i] = num+1
-       TERMINAR
-       COPEAR Arreglo1[] A Arreglo[]
-    TERMINAR METODO
+// 3. PROCESOS
+MODULO searchSecuencial(ARREGLO arr, ENTERO busq) RETORNA ENTERO
+    PARA i DESDE 0 HASTA TAMAÑO(arr) - 1 HACER
+        SI (arr[i] == busq) ENTONCES
+            RETORNAR i
+        FIN SI
+    FIN PARA
+    RETORNAR -1
+FIN MODULO
 
-3. PROCESOS
-3.1 METODO searchSecuencial(int Arreglo[], int busq):
-        SI (Arreglo[] == null) REGRESAR -1;
-        DESDE i = 0 HASTA(Arreglo.lenght()) EMPEZAR:
-            SI (Arreglo[i] == busq) REGRESAR i;
-        TERMINAR
-    TERMINAR METODO
+MODULO searchBinaria(ARREGLO arr, ENTERO busq) RETORNA ENTERO
+    ENTERO inicio = 0
+    ENTERO fin = TAMAÑO(arr) - 1
+    ENTERO mitad
 
-3.2 METODO searchBinaria(int Arreglo[], int busq):
-       SI (Arreglo[] == null) REGRESAR -1;
-        int inicio = 0
-        int fin = (Arreglo.lenght() - 1)
-        int mitad = 0
+    MIENTRAS (inicio <= fin) HACER
+        mitad = inicio + (fin - inicio) / 2
+        SI (arr[mitad] == busq) ENTONCES
+            RETORNAR mitad
+        FIN SI
 
-        MIENTRAS ( inicio <= fin) EMPEZAR:
-            mitad = inicio + (fin - inicio) / 2
-                SI ( == Arreglo[i]) ENTONCES:
-                    REGRESA mitad
-                SINO
-                    fin = mitad - 1
-        TERMINAR
-    TERMINAR METODO
+        SI (arr[mitad] < busq) ENTONCES
+            inicio = mitad + 1
+        SINO
+            fin = mitad - 1
+        FIN SI
+    FIN MIENTRAS
+    RETORNAR -1
+FIN MODULO
 
-4 SALIDA
-4.1 METODO table():
-        int n = Arreglo.lenght()
-        int mitad = n/2
-        MS = TElapser(Arreglo[], 0)
-        PS = TElapser(Arreglo[], Arreglo[mitad])
-        PRS = TElapserS(Arreglo[], -1)
-        MB = TElapserB(Arreglo[], Arreglo[mitad])
-        PB = TElapserB(Arreglo[], 2)
-        PRB = TElapserB(Arreglo[], -1)
+// 4. SALIDA
+MODULO formatoTiempo(ENTERO LARGO milisegundos) RETORNA CADENA
+    // Operaciones matemáticas para obtener horas, minutos, segundos y milisegundos
+    RETORNAR cadena_formateada_en_reloj
+FIN MODULO
 
-        ESCRIBE("COMPARACION MEJOR, PEOR Y PROMEDIO")
-        ESCRIBE("METODO DE BUSQUEDA  | MEJOR | PEOR | PROMEDIO")
-        ESCRIBE("BUSQUEDA SECUENCIAL | MS    | PRS  | PS")
-        ESCRIBE("BUSQUEDA SECUENCIAL | MB    | PRB   | PB")
-    TERMINAR METODO
+MODULO medirTiempoSecuencial(ARREGLO arr, ENTERO val) RETORNA ENTERO LARGO
+    ENTERO LARGO inicio = OBTENER_TIEMPO_ACTUAL()
+    PARA i DESDE 0 HASTA 9999 HACER
+        LLAMAR searchSecuencial(arr, val)
+    FIN PARA
+    ENTERO LARGO fin = OBTENER_TIEMPO_ACTUAL()
+    RETORNAR (fin - inicio)
+FIN MODULO
 
-4.2 METDO long TElapserS(int[] Arreglo, int val):
-        TimeElapsed crono = new TimeElapsed()
-        searchSecuencial(Arreglo[], val)
-        crono.calcula()
-        REGRESA crono.te
-    TERMINAR METODO
+MODULO medirTiempoBinaria(ARREGLO arr, ENTERO val) RETORNA ENTERO LARGO
+    ENTERO LARGO inicio = OBTENER_TIEMPO_ACTUAL()
+    PARA i DESDE 0 HASTA 9999 HACER
+        LLAMAR searchBinaria(arr, val)
+    FIN PARA
+    ENTERO LARGO fin = OBTENER_TIEMPO_ACTUAL()
+    RETORNAR (fin - inicio)
+FIN MODULO
 
-4.2 METODO long TElapserB(int[] Arreglo, int val):
-        TimeElapsed crono = new TimeElapsed()
-        serchBinaria(Arreglo[], val)
-        crono.calcula()
-        REGRESA crono.te
-    TERMINAR METODO
+MODULO imprimirTabla()
+    IMPRIMIR "--- TABLA COMPARATIVA DE TIEMPOS ---"
+    IMPRIMIR "Escenario       | Secuencial      | Binaria"
+    IMPRIMIR "---------------------------------------------------"
+    IMPRIMIR "Mejor Caso      | " + formatoTiempo(ms)  + " | " + formatoTiempo(mb)
+    IMPRIMIR "Promedio        | " + formatoTiempo(ps)  + " | " + formatoTiempo(pb)
+    IMPRIMIR "Peor Caso       | " + formatoTiempo(prs) + " | " + formatoTiempo(prb)
+    IMPRIMIR "Cantidad de datos procesados: " + (10000 * CONVERTIR_A_ENTERO(num))
+FIN MODULO
 
-5 NAVEGACION
-5.1 METODO navigation():
-        goal()
-        data()
-        tabla()
-    TERMINAR METODO
+// 5. NAVEGACION (MAIN)
+MODULO PRINCIPAL run()
+    ENTERO n
+    ENTERO mejorCaso, casoPromedio, peorCaso
 
-METODO main():
-    navigation()
+    LLAMAR goal()
+    LLAMAR data()
+    LLAMAR generador()
+
+    n = TAMAÑO(arreglo)
+    mejorCaso = arreglo[0]
+    casoPromedio = arreglo[n / 2]
+    peorCaso = arreglo[n - 1]
+
+    IMPRIMIR "Encendiendo la JVM..."
+    LLAMAR medirTiempoSecuencial(arreglo, casoPromedio)
+    LLAMAR medirTiempoBinaria(arreglo, casoPromedio)
+
+    ms = LLAMAR medirTiempoSecuencial(arreglo, mejorCaso)
+    ps = LLAMAR medirTiempoSecuencial(arreglo, casoPromedio)
+    prs = LLAMAR medirTiempoSecuencial(arreglo, peorCaso)
+
+    mb = LLAMAR medirTiempoBinaria(arreglo, casoPromedio)
+    pb = LLAMAR medirTiempoBinaria(arreglo, arreglo[n / 4])
+    prb = LLAMAR medirTiempoBinaria(arreglo, peorCaso)
+
+    LLAMAR imprimirTabla()
+FIN MODULO PRINCIPAL

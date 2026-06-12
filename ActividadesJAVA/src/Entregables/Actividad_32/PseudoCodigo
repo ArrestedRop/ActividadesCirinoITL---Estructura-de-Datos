@@ -10,22 +10,18 @@ Tarea 32
 Fecha: 12/5/2026
 */
 
-// --- VARIABLES GLOBALES ---
 ENTERO num
 ENTERO LARGO md, pd, prd, mn, pn, prn
 
-// ---------------------------------------------------------
 // 1. META
-// ---------------------------------------------------------
 MODULO goal()
     IMPRIMIR "Script basico que permite medir el tiempo"
     IMPRIMIR "en los escenarios mejor, peor y promedio de los"
     IMPRIMIR "algoritmos de ordenamiento externo (Intercalacion Directa y Natural)"
+    IMPRIMIR "ademas de imprimirlo en forma de tabla comparativa"
 FIN MODULO
 
-// ---------------------------------------------------------
 // 2. DATOS
-// ---------------------------------------------------------
 MODULO data()
     IMPRIMIR "Deme la cantidad de terminos que desea generar: "
     LEER num
@@ -51,9 +47,7 @@ MODULO generador(ENTERO escenario, CADENA nombreArchivo)
     CERRAR ARCHIVO nombreArchivo
 FIN MODULO
 
-// ---------------------------------------------------------
 // 3. PROCESOS: INTERCALACIÓN DIRECTA
-// ---------------------------------------------------------
 MODULO intercalacionDirecta(CADENA fName)
     ENTERO n = CONVERTIR_A_ENTERO(num)
     ENTERO blockSize = 1
@@ -119,9 +113,7 @@ MODULO fusionarDirecta(fName, f1Name, f2Name, blockSize)
     CERRAR TODOS LOS ARCHIVOS
 FIN MODULO
 
-// ---------------------------------------------------------
 // 3. PROCESOS: INTERCALACIÓN NATURAL
-// ---------------------------------------------------------
 MODULO intercalacionNatural(CADENA fName)
     BOOLEANO ordenado = FALSO
     MIENTRAS (ordenado == FALSO) HACER
@@ -192,9 +184,7 @@ MODULO fusionarNatural(fName, f1Name, f2Name)
     CERRAR ARCHIVOS
 FIN MODULO
 
-// ---------------------------------------------------------
 // 4. SALIDA
-// ---------------------------------------------------------
 MODULO formatoTiempo(ENTERO LARGO milisegundos) RETORNA CADENA
     // Operaciones matemáticas para obtener horas, minutos, segundos y milisegundos
     RETORNAR cadena_formateada_en_reloj
@@ -227,9 +217,7 @@ MODULO imprimirTabla()
     IMPRIMIR "Cantidad de datos en el archivo: " + num
 FIN MODULO
 
-// ---------------------------------------------------------
 // 5. NAVEGACIÓN (MAIN)
-// ---------------------------------------------------------
 MODULO PRINCIPAL run()
     LLAMAR goal()
     LLAMAR data()
