@@ -1,4 +1,4 @@
-package tarea_03;
+package tarea_03.utilities;
 import java.util.Scanner;
 
 public class Misc {
